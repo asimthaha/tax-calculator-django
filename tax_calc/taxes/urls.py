@@ -4,9 +4,9 @@ from . import views
 app_name = "taxes"
 
 urlpatterns = [
-    path("catalog/", views.index, name="index"),
-    path("register", views.register_request, name="register"),
-    path("login", views.login_request, name="login"),
+    path("", views.index_requestView, name="index"),
+    path("register", views.register_requestView, name="register"),
+    path("login", views.login_requestView, name="login"),
     # path("logout", views.logout_view, name='base'),
-    path("base", views.baseView, name="base"),
+    path("base", views.base_requestView, name="base"),
 ]

@@ -226,10 +226,12 @@
         </div>
         <form
           method="POST"
-          action=""
+          action="index"
           class="needs-validation shadow bg-white rounded border border-success border-3"
+          enctype="multipart/form-data"
           novalidate
         >
+          {% csrf_token %}
         
           <article class="row justify-content-center">
             <div
@@ -239,7 +241,7 @@
                 >Finacial Year<span class="required-asterisk">*</span>
               </label>
               <div class="form-group">
-                <select name="Finacial_year" class="form-select" required>
+                <select name="Financial_year" class="form-select" required id="financial_year">
                   <option selected disabled value="">
                     Please Select a Finacial Year
                   </option>
@@ -259,7 +261,7 @@
                 >Age Group<span class="required-asterisk">*</span>
               </label>
               <div class="form-group">
-                <select name="Age" class="form-select" required>
+                <select name="Age_group" class="form-select" required id="age_group">
                   <option selected disabled value="">
                     Please Select a Age group
                   </option>
@@ -280,7 +282,7 @@
                 >Category<span class="required-asterisk">*</span>
               </label>
               <div class="form-group">
-                <select name="Category" class="form-select" required>
+                <select name="Category" class="form-select" id="category" required >
                   <option selected disabled value="">
                     Please Select a Category
                   </option>
@@ -299,22 +301,22 @@
               required
               type="radio"
               class="btn-check form-check-input"
-              name="options"
-              id="option1"
+              name="Regimes"
+              id="old_regime"
               autocomplete="off"
             />
-            <label class="btn btn-outline-secondary col-md-3 m-2 form-check-label" for="option1"
+            <label class="btn btn-outline-secondary col-md-3 m-2 form-check-label" for="old_regime"
               >Old Regime</label
             >
             <input
               required
               type="radio"
               class="btn-check form-check-input"
-              name="options"
-              id="option2"
+              name="Regimes"
+              id="new_regime"
               autocomplete="off"
             />
-            <label class="btn btn-outline-primary col-md-3 m-2 form-check-label" for="option2"
+            <label class="btn btn-outline-primary col-md-3 m-2 form-check-label" for="new_regime"
               >New Regime</label
             >
             <div class="invalid-feedback text-center">Please select a regime</div>
@@ -330,11 +332,11 @@
                 <div class="form-group">
                   <input
                     required
-                    name="income"
-                    onkeypress="return allowOnlyLetters(event,this);"
+                    name="Income"
                     type="text"
                     class="form-control"
                     placeholder="Income from salary *"
+                    id="income"
                     value=""
                   />
                   <div class="invalid-feedback">Please give income.</div>
@@ -349,7 +351,8 @@
                   <input
                     disabled
                     required
-                    name="std_deduction"
+                    name="Std_deduction"
+                    id="std_deduction"
                     type="text"
                     minlength="10"
                     maxlength="10"
@@ -369,7 +372,7 @@
                 <div class="form-group">
                   <input
                     id="ded_80c"
-                    name="ded_80c"
+                    name="Ded_80c"
                     type="number"
                     class="form-control"
                     placeholder="Enter GPE PPE LIC etc *"
@@ -385,12 +388,12 @@
                 </label>
                 <div class="form-group">
                   <input
-                    name="taxable_income"
-                    onkeypress="return allowOnlyLetters(event,this);"
+                    name="Taxable_income"
+                    id="taxable_income"
                     type="text"
                     class="form-control"
                     placeholder=""
-                    value="0"
+                    value=""
                   />
                   <div class="invalid-feedback">Please give income.</div>
                   <div class="valid-feedback">Looks good!</div>
@@ -405,7 +408,8 @@
                 </label>
                 <div class="form-group">
                   <input
-                    name="other"
+                    name="Other_income"
+                    id="other_income"
                     type="text"
                     class="form-control"
                     placeholder="Your other income "
@@ -421,7 +425,8 @@
                 </label>
                 <div class="form-group">
                   <input
-                    name="pro_tax"
+                    name="Pro_tax"
+                    id="pro_tax"
                     type="text"
                     minlength="10"
                     maxlength="10"
@@ -440,13 +445,12 @@
                 <div class="form-group">
                   <input
                     id="nps"
-                    name="nps"
+                    name="Nps"
                     type="number"
                     class="form-control"
                     placeholder="max NPS 50,000 *"
                     value=""
                   />
-                  <i class="bi bi-eye-slash" id="togglePassword"></i>
                   <div class="invalid-feedback">Please add valid nps.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
@@ -458,7 +462,8 @@
                 <div class="form-group">
                   <input
                     required
-                    name="income"
+                    name="Tax_on_taxable"
+                    id="tax_on_taxable"
                     type="text"
                     class="form-control"
                     placeholder=""
@@ -477,11 +482,12 @@
                 </label>
                 <div class="form-group">
                   <input
-                    name="total_tax"
+                    name="Total_tax"
+                    id="total_tax"
                     type="text"
                     class="form-control"
                     placeholder="Your total tax *"
-                    value=""
+                    value="{{total_tax}}"
                   />
                   <div class="invalid-feedback"></div>
                   <div class="valid-feedback">Looks good!</div>
@@ -493,7 +499,8 @@
                 </label>
                 <div class="form-group">
                   <input
-                    name="hra"
+                    name="Hra"
+                    id="hra"
                     minlength="6"
                     maxlength="6"
                     type="text"
@@ -513,7 +520,7 @@
                 <div class="form-group">
                   <input
                     id="home_loan"
-                    name="home_loan"
+                    name="Home_loan"
                     type="text"
                     class="form-control"
                     placeholder="Interest on Home Loan *"
@@ -530,7 +537,8 @@
                 <div class="form-group">
                   <input
                     required
-                    name="tax_rebate"
+                    name="Tax_rebate"
+                    id="tax_rebate"
                     type="text"
                     class="form-control"
                     placeholder=""
