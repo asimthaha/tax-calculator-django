@@ -93,3 +93,6 @@ def logout_requestView(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect('/')
+
+def saved_recordsl_requestView(request):
+    return render(request, "taxes/saved_records.html")

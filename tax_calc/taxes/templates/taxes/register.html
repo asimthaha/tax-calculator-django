@@ -5,148 +5,181 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
 <!------ Include the above in your HEAD tag ---------->
-
-<div class="container register">
-  <article class="d-flex justify-content-center">
-    <article class="row">
-      <section class="col-md-4 d-flex flex-column register-left justify-content-center align-items-center pr-5 mr-5">
-        <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" alt="" />
-        <h3>Welcome</h3>
-        <p>Register Your Account</p>
-      </section>
-      <section class="col-md-8 d-flex flex-column justify-content-center">
-        <div class="text-center" id="myTabContent">
-          <div class="d-flex">
-            <h3 class="mx-auto">User Registration</h3>
-          </div> 
-            <form
-              method="POST"
-              action="register"
-              class="needs-validation"
-              novalidate
-            >
-              {% csrf_token %}
-              <div class="register-form">
-                <div class="d-flex flex-column justify-content-center">
-                  <div class="form-element">
-                    <div class="form-group">
-                      <input
-                        required
-                        name="name"
-                        onkeypress="return allowOnlyLetters(event,this);"
-                        type="text"
-                        class="form-control"
-                        placeholder="Full Name *"
-                        value=""
-                      />
-                      <div class="invalid-feedback">
-                        Please choose a username.
+<body>
+  <div class="container register border border-1 rounded border-primary shadow">
+    <article class="">
+      <article class="row">
+        <section class="col-md-5 d-flex flex-column register-left justify-content-center align-items-center pr-5 mr-5 bg-secondary">
+          <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" alt="" />
+          <h3>Welcome</h3>
+          <p>Register Your Account</p>
+        </section>
+        <section class="col-md-7 d-flex flex-column justify-content-center">
+          <div class="text-center" id="myTabContent">
+            <div class="d-flex m-4">
+              <h3 class="mx-auto">User Registration</h3>
+            </div> 
+              <form
+                method="POST"
+                action="register"
+                class="needs-validation"
+                novalidate
+              >
+                {% csrf_token %}
+                <div class="register-form">
+                  <div class="d-flex flex-column justify-content-center">
+                    <div class="form-element">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning" id="basic-addon1">Name</span>
+                          </div>
+                          <input
+                            required
+                            name="name"
+                            oninput=""
+                            onkeypress="return allowOnlyLetters(event,this);"
+                            type="text"
+                            class="form-control"
+                            placeholder="Full Name *"
+                            value=""
+                          />
+                          <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
                       </div>
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
-                  </div>
-                  <div class="form-element">
-  
-                    <div class="form-group">
-                      <input
-                        required
-                        name="email"
-                        type="email"
-                        class="form-control"
-                        placeholder="Email *"
-                        value=""
-                      />
-                      <div class="invalid-feedback">
-                        Please provide a valid email like example@gmail.com
+                    <div class="form-element">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning" id="basic-addon1">Email</span>
+                          </div>
+                          <input
+                            required
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="Email *"
+                            value=""
+                          />
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">example@gmail.com</span>
+                          </div>
+                          <div class="invalid-feedback">
+                            Please provide a valid email like example@gmail.com
+                          </div>
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
                       </div>
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
-                  </div>
-                  <div class="form-element">
-      
-                    <div class="form-group">
-                      <input
-                        required
-                        name="zipcode"
-                        minlength="6"
-                        maxlength="6"
-                        type="text"
-                        class="form-control"
-                        placeholder="Zipcode *"
-                        value=""
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                      />
-                      <div class="invalid-feedback">
-                        Please give a valid zipcode.
+                    <div class="form-element">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning" id="basic-addon1">zipcode</span>
+                          </div>
+                          <input
+                            required
+                            name="zipcode"
+                            minlength="6"
+                            maxlength="6"
+                            type="text"
+                            class="form-control"
+                            placeholder="Zipcode *"
+                            value=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                          />
+                          <div class="invalid-feedback">
+                            Please give a valid zipcode.
+                          </div>
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
                       </div>
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
-                  </div>
-                  <div class="form-element">
-        
-                    <div class="form-group">
-                      <input
-                        id="pass1"
-                        required
-                        name="pass1"
-                        type="password"
-                        class="form-control"
-                        placeholder="Password *"
-                        value=""
-                      />
-                      <i class="bi bi-eye-slash" id="togglePassword"></i>
-                      <div class="invalid-feedback">
-                        Please add valid password.
+                    <div class="form-element">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning " id="basic-addon1">Password</span>
+                          </div>
+                          <input
+                            id="pass1"
+                            required
+                            name="pass1"
+                            type="password"
+                            class="form-control"
+                            placeholder="Password *"
+                            value=""
+                          />
+                          <div class="input-group-prepend">
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                          <lord-icon
+                              src="https://cdn.lordicon.com/tyounuzx.json"
+                              trigger="hover"
+                              style="width:35px;height:35px">
+                          </lord-icon>
+                          </div>
+                          <i class="bi bi-eye-slash" id="togglePassword"></i>
+                          <div class="invalid-feedback">
+                            Please add valid password.
+                          </div>
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
                       </div>
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
-                  </div>
-                  <div class="form-element">
-                    <div class="form-group">
-                      <input
-                        required
-                        id="pass2"
-                        name="pass2"
-                        type="password"
-                        class="form-control"
-                        placeholder="Confirm Password *"
-                        value=""
-                      />
-                      <div class="invalid-feedback">
-                        Please give the same password.
+                    <div class="form-element">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-warning" id="basic-addon1">Confirm</span>
+                          </div>
+                          <input
+                            required
+                            id="pass2"
+                            name="pass2"
+                            type="password"
+                            class="form-control"
+                            placeholder="Confirm Password *"
+                            value=""
+                          />
+                          <div class="invalid-feedback">
+                            Please give the same password.
+                          </div>
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
                       </div>
-                      <div class="valid-feedback">Looks good!</div>
                     </div>
-                  </div>
-                  <div class="form-element">
-                    <div>
-                      <input
-                        class="btn btn-outline-primary col-md-12 p-2 mb-3"
-                        type="submit"
-                        value="Register"
-                      />
-                      <input
-                        onclick=""
-                        class="btn btn-outline-secondary col-md-12 p-2"
-                        type="reset"
-                        value="Cancel"
-                      />                 
+                    <div class="form-element">
+                      <div class="">
+                        <input
+                          class="btn btn-outline-primary col-md-4 p-2 mb-3"
+                          type="submit"
+                          value="Register"
+                        />
+                        <input
+                          onclick=""
+                          class="btn btn-outline-secondary col-md-4 p-2 mb-3"
+                          type="reset"
+                          value="Cancel"
+                        />                 
+                      </div>
                     </div>
-                  </div>
-              </div>
-            </form>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </article>
-</div>
-
-<!-- JavaScript Bundle with Popper -->
+    </article>
+  </div>
+  <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="{% static 'user/js/script.js' %}" type="text/javascript"></script>
+<script src="{% static 'taxes/js/script.js' %}" type="text/javascript"></script>
 <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function () {
@@ -193,3 +226,6 @@
     }
   }
 </script>
+<script></script>
+</body>
+
