@@ -1,18 +1,47 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'taxes/css/register.css' %}" />
-<script src="{% static 'taxes/js/script.js' %}" type="text/javascript"></script>
 <!-- CSS only -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
 <!------ Include the above in your HEAD tag ---------->
-<body>
-  <div class="container register border border-1 rounded border-primary shadow">
+<body class="bg-secondary">
+  <div class="container register border border-1 rounded border-warning shadow">
     <article class="">
-      <article class="row">
-        <section class="col-md-5 d-flex flex-column register-left justify-content-center align-items-center pr-5 mr-5 bg-secondary">
-          <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" alt="" />
-          <h3>Welcome</h3>
-          <p>Register Your Account</p>
+      <article class="row bg-light border rounded">
+        <section class="col-md-5 d-flex flex-column justify-content-center align-items-center pr-5 mr-5">
+          <!--carousel-start-->
+          <div class="banner slider">
+            <div
+              id="carousel"
+              class="carousel slide carousel-dark carousel-fade"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner" data-bs-ride="carousel">
+                {% for images in data %}
+                <div
+                  class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}"
+                  data-bs-interval="3000"
+                >
+                  <div class="carousel-caption align-items-center register-left ">
+                    <div class="col-md-12">
+                      <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" alt="" />
+                      <h3 class="text-white">Welcome</h3>
+                      <p class="text-light text-monospace font-weight-bold">Register Your Account</p>
+                    </div>
+                  </div>
+                  <img
+                    src="{{ images.photo.url }}"
+                    class="carousel-img d-block w-100 rounded"
+                    alt="Los Angeles"
+                  />
+                  
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!--	carousel-end-->
         </section>
         <section class="col-md-7 d-flex flex-column justify-content-center">
           <div class="text-center" id="myTabContent">
@@ -36,13 +65,11 @@
                           </div>
                           <input
                             required
-                            name="name"
-                            oninput=""
-                            onkeypress="return allowOnlyLetters(event,this);"
                             type="text"
                             class="form-control"
+                            name="name"
                             placeholder="Full Name *"
-                            value=""
+                            onkeypress="return allowOnlyLetters(event);"
                           />
                           <div class="invalid-feedback">
                             Please choose a username.
@@ -61,6 +88,7 @@
                             required
                             name="email"
                             type="email"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             class="form-control"
                             placeholder="Email *"
                             value=""
@@ -84,6 +112,7 @@
                           <input
                             required
                             name="zipcode"
+                            id="zipcode"
                             minlength="6"
                             maxlength="6"
                             type="text"
@@ -101,9 +130,9 @@
                     </div>
                     <div class="form-element">
                       <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text bg-warning " id="basic-addon1">Password</span>
+                        <div class="input-group" id="pass1">
+                          <div class="input-group-text bg-warning">
+                            <span id="basic-addon1">Password</span>
                           </div>
                           <input
                             id="pass1"
@@ -113,18 +142,13 @@
                             class="form-control"
                             placeholder="Password *"
                             value=""
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                           />
-                          <div class="input-group-prepend">
-                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                          <lord-icon
-                              src="https://cdn.lordicon.com/tyounuzx.json"
-                              trigger="hover"
-                              style="width:35px;height:35px">
-                          </lord-icon>
+                          <div class="input-group-text bg-warning">
+                            <a href=""><i class="bi bi-eye-slash-fill text-dark"></i></a>
                           </div>
-                          <i class="bi bi-eye-slash" id="togglePassword"></i>
                           <div class="invalid-feedback">
-                            Please add valid password.
+                            password contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                           </div>
                           <div class="valid-feedback">Looks good!</div>
                         </div>
@@ -145,6 +169,9 @@
                             placeholder="Confirm Password *"
                             value=""
                           />
+                          <div class="input-group-text bg-warning">
+                            <a href=""><i class="bi bi-eye-slash-fill text-dark"></i></a>
+                          </div>
                           <div class="invalid-feedback">
                             Please give the same password.
                           </div>
@@ -178,8 +205,6 @@
   <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script src="{% static 'taxes/js/script.js' %}" type="text/javascript"></script>
 <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function () {
@@ -207,25 +232,32 @@
 </script>
 <script language="Javascript" type="text/javascript">
 
-  function allowOnlyLetters(e, t) {
-    if (window.event) {
-      var charCode = window.event.keyCode;
-    }
-    else if (e) {
-      var charCode = e.which;
-    }
-    else { return true; }
-    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-      return true;
-    else if ((charCode == 32)) {
-      return true;
-    }
-    else {
-      alert("Please enter only alphabets");
-      return false;
-    }
+function allowOnlyLetters(e) {
+  const charCode = e.which || e.keyCode;
+  const isLetter = (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122);
+  const isSpace = charCode === 32;
+  if (!isLetter && !isSpace) {
+    alert("Please enter only alphabets");
+    return false;
   }
+  return true;
+}
 </script>
-<script></script>
-</body>
+<script>
+  $(document).ready(function() {
+$("#pass1 a").on('click', function(event) {
+event.preventDefault();
+if ($('#pass1 input').attr("type") == "text") {
+$('#pass1 input').attr('type', 'password');
+$('#pass1 i').addClass("bi bi-eye-fill-slash");
+$('#pass1 i').removeClass("bi-eye");
+} else if ($('#pass1 input').attr("type") == "password") {
+$('#pass1 input').attr('type', 'text');
+$('#pass1 i').removeClass("bi bi-eye-fill-slash");
+$('#pass1 i').addClass("bi-eye");
+}
+});
+});
+</script>
 
+</body>

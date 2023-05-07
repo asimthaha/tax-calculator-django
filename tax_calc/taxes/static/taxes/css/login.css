@@ -129,3 +129,8 @@ color: white;
 .links a{
 margin-left: 4px;
 }
+
+.admin a{
+  font-size: 30px;
+  margin : 10px;
+}

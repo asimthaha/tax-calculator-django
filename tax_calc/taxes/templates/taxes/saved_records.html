@@ -4,8 +4,168 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+      .modal-body th{
+          border: 1px solid rgb(5, 93, 6);
+      }
+      @media screen {
+        #printSection {
+        display: none;
+         }
+      }
+      @media print {
+        body * {
+          visibility:hidden;
+        }
+        #staticBackdrop, #staticBackdrop * {
+          visibility:visible;
+        }
+        #printButton button{
+          visibility: hidden;
+        }
+      }
+    </style>
   </head>
-  <body>
-    <h1>Helllooo</h1>
+  <body class="container">
+    <section class="row d-flex">
+      <div class="d-flex" id="class2">
+        <h3 class="text-primary mx-auto p-5 m-2">Tax Records</h3>
+      </div>
+      {% for records in saved_records %}
+      <article class="col-md-4">
+        <div
+          class="card mb-3 shadow border border-2 border-success"
+          style="max-width: 540px"
+        >
+          <div class="row g-0">
+            <div class="card-header">
+              <!-- <img
+                src="{{ items.photo.url }}"
+                class="img-fluid rounded"
+                alt="los"
+              /> -->
+              <h3>{{records.regime}}</h3>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body mb-2">
+                <h5 class="card-title font-weight-bold">{{records.age_group}}</h5>
+                <!-- Button trigger modal -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Read more
+                </button>
+                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-danger">
+                  <i class="bi bi-trash-fill"></i>
+                </a>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Saved Records</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <table class="table table-hover"">
+                          <tbody class="border border-success">
+                            <tr>
+                              <th scope="row">Financial year</th>
+                              <td>{{records.financial_year}}</td>
+                              <th>Category</th>
+                              <td>{{records.category_emp_or_pen}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Age Group</th>
+                              <td>{{records.age_group}}</td>
+                              <th>Regime</th>
+                              <td>{{records.regime}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Inc0me</th>
+                              <td>{{records.income}}</td>
+                              <th>Other income</th>
+                              <td>{{records.other_income}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Standard deduction</th>
+                              <td>{{records.std_deduction}}</td>
+                              <th>Professional Tax</th>
+                              <td>{{records.pro_tax}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">HRA</th>
+                              <td>{{records.hra}}</td>
+                              <th>Home Loan</th>
+                              <td>{{records.home_loan}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Deductions u/s 80c</th>
+                              <td>{{records.ded_80c}}</td>
+                              <th>NPS</th>
+                              <td>{{records.nps}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Taxable Income</th>
+                              <td>{{records.taxable_income}}</td>
+                              <th>Tax on Taxable</th>
+                              <td>{{records.tax_on_taxable}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Rebate u/s 87a</th>
+                              <td>{{records.rebate}}</td>
+                              <th>Surcharge</th>
+                              <td>{{records.surcharge}}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Education cess</th>
+                              <td>{{records.education_cess}}</td>
+                              <th>Total Tax</th>
+                              <td>{{records.total_tax}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="modal-footer" id="printButton">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="printFunction()">Print</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <h5>Total Tax: {{records.total_tax}}</h5>
+            </div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+    <script>
+      var popoverTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="popover-test"]')
+      );
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function printFunction() { 
+        window.print(); 
+      }
+      </script>
   </body>
 </html>

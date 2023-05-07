@@ -52,7 +52,7 @@
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item"
-                    ><span class="text-uppercase">{{username}}</span></a
+                    ><span class="text-uppercase">{{name}}</span></a
                   >
                 </li>
                 <!--						<li><a class="dropdown-item" href="#">Edit Account</a></li>-->
@@ -61,7 +61,7 @@
                   <a
                     onclick="return confirm('Are you sure you want to Logout')"
                     class="dropdown-item"
-                    href="/logout"
+                    href="/login"
                     >Logout</a
                   >
                 </li>
@@ -117,7 +117,10 @@
               </li>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-primary" href="#">All Records</a>
+                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
               </li>
               <li">
                 <a
@@ -127,7 +130,7 @@
                   data-bs-whatever="@mdo"
                   class="btn btn-outline-primary position-relative mr-3"
                 >
-                  Notificatios
+                <i class="bi bi-bell-fill"></i>
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger"
                   >
@@ -151,7 +154,7 @@
                           class="modal-title text-uppercase"
                           id="exampleModalLabel"
                         >
-                          New message: {{username}}
+                          New message: {{name}}
                         </h5>
                         <button
                           type="button"
@@ -160,6 +163,7 @@
                           aria-label="Close"
                         ></button>
                       </div>
+                      <p>No Notifications</p>
                       {% for car in enquiry_data %}
                       <div
                         class="modal-body border  border-2 m-1"
@@ -211,12 +215,14 @@
             Tax Calculator
           </h3>
         </div>
+        <!-- main form -->
         <form
           method="POST"
-          action="{% url 'taxes:saved_records' %}"
+          action="{% url 'taxes:index' %}"
           onsubmit="TaxCalculate()"
           class="needs-validation shadow bg-white rounded border border-2"
           enctype="multipart/form-data"
+          id="my_form"
           novalidate
         >
           {% csrf_token %}
@@ -322,15 +328,16 @@
                     required
                     name="Income"
                     type="text"
-                    
                     tabindex="1"
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     oninput="taxCalculate()"
                     placeholder="Income from salary *"
                     id="income"
-                    value=""
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please give income.</div>
+                  <div class="invalid-feedback">Please provide income.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -346,13 +353,14 @@
                     name="Std_deduction"
                     id="std_deduction"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="Your standard deduction *"
                     value="50000"
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                   />
-                  <div class="invalid-feedback">Please add a valid number.</div>
+                  <div class="invalid-feedback">Please add a valid postitve number.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -366,13 +374,14 @@
                     id="ded_80c"
                     name="Ded_80c"
                     type="text"
-                    
                     oninput="taxCalculate()"
                     class="form-control"
-                    placeholder="Enter GPE PPE LIC etc *"
-                    value=""
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
+                    placeholder="Enter GPF PPF LIC etc *"
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please add valid password.</div>
+                  <div class="invalid-feedback">Please add valid postitve number.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -386,12 +395,13 @@
                     name="Taxable_income"
                     id="taxable_income"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
-                    value=""
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please give income.</div>
+                  <div class="invalid-feedback">Please provide income.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -405,10 +415,11 @@
                     name="Surcharge"
                     id="surcharge"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
-                    value=""
+                    value="0"
                   />
                   <div class="invalid-feedback">Please give income.</div>
                   <div class="valid-feedback">Looks good!</div>
@@ -427,13 +438,14 @@
                     tabindex="2"
                     id="other_income"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="Your other income "
                     oninput="taxCalculate()"
-                    value=""
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please choose a username.</div>
+                  <div class="invalid-feedback">Please provide a postive income.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -447,14 +459,15 @@
                     id="pro_tax"
                     tabindex="2"
                     type="text"
-                    
                     oninput="taxCalculate()"
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     tabindex="5"
                     placeholder="P tax if any *"
-                    value=""
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please add a valid number.</div>
+                  <div class="invalid-feedback">Please provide a postitve number.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -467,14 +480,15 @@
                     id="nps"
                     name="Nps"
                     type="text"
-                    
                     oninput="taxCalculate()"
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     tabindex="8"
                     placeholder="max NPS 50,000 *"
-                    value=""
+                    value="0"
                   />
-                  <div class="invalid-feedback">Please add valid nps.</div>
+                  <div class="invalid-feedback">Please add a postitve nps.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -488,9 +502,11 @@
                     name="Tax_on_taxable"
                     id="tax_on_taxable"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
+                    value="0"
                   />
                 </div>
               </div>
@@ -504,9 +520,11 @@
                     name="Education_cess"
                     id="education_cess"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
+                    value="0"
                   />
                 </div>
               </div>
@@ -523,10 +541,12 @@
                     name="Total_tax"
                     id="total_tax"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     tabindex="3"
                     placeholder="Your total tax *"
+                    value="0"
                   />
                   <div class="invalid-feedback"></div>
                   <div class="valid-feedback">Looks good!</div>
@@ -541,15 +561,16 @@
                     name="Hra"
                     id="hra"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     tabindex="6"
                     oninput="taxCalculate()"
                     placeholder="u/s 10 (13A) of ITR *"
-                    value=""
+                    value="0"
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                   />
-                  <div class="invalid-feedback">Please give a valid.</div>
+                  <div class="invalid-feedback">Please give a postitve hra.</div>
                   <div class="valid-feedback">Looks good!</div>
                 </div>
               </div>
@@ -562,13 +583,14 @@
                     id="home_loan"
                     name="Home_loan"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     tabindex="9"
                     oninput="taxCalculate()"
                     placeholder="Interest on Home Loan *"
                     oninput="console.log(TaxCalculate())"
-                    value=""
+                    value="0"
                   />
                   <div class="invalid-feedback">Please.</div>
                   <div class="valid-feedback">Looks good!</div>
@@ -584,9 +606,11 @@
                     name="Tax_rebate"
                     id="tax_rebate"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
+                    value="0"
                   />
                 </div>
               </div>
@@ -600,9 +624,11 @@
                     name="Tax_payable"
                     id="tax_payable"
                     type="text"
-                    
                     class="form-control"
+                    min="1"
+                    onkeypress="return allowOnlyNumbers(event)"
                     placeholder="0"
+                    value="0"
                   />
                 </div>
               </div>
@@ -670,39 +696,38 @@
                     aria-labelledby="exampleModalCenterTitle"
                     aria-hidden="true"
                   >
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5
-                            class="modal-title font-weight-bold"
-                            id="exampleModalLongTitle"
-                          >
-                            {{items.card_title}}
-                          </h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <p class="card-text">{{items.card_description}}</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                        </div>
+                  <div
+                    class="modal-dialog modal-dialog-centered"
+                    role="document"
+                  >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title font-weight-bold"
+                          id="exampleModalLongTitle"
+                        >
+                          {{items.card_title}}
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="card-text">{{items.card_description}}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -819,125 +844,6 @@
       </section>
       <!-- tax slab rates end -->
 
-      <!-- feedback from start -->
-      <section class="feedback">
-        <div class="d-flex">
-          <h2 class="text-primary mx-auto p-5 m-2">Feedback form</h2>
-        </div>
-        <div class="container border border-2 shadow rounded">
-          <div class="bg-light">
-            <div class="row">
-              <div class="col-lg-8 col-md-12 p-5 bg-white rounded-3">
-                <div class="d-flex mb-3 flex-column">
-                  <h1 class="h5 text-dark my-4">What service You need ?</h1>
-                </div>
-                <form class="row mb-3 needs-validation"
-                enctype="multipart/form-data"
-                novalidate>
-                  <div class="col-md-12 p-3">
-                    <input required placeholder="first name" type="text" name="" id="" />
-                    <div class="invalid-feedback">Please provide Name.</div>
-                    <div class="valid-feedback">Looks good!</div>
-                  </div>
-                  <div class="col-md-6 p-3">
-                    <input required placeholder="E-mail" type="email" name="" id="" />
-                    <div class="invalid-feedback">Please provide email.</div>
-                    <div class="valid-feedback">Looks good!</div>
-                  </div>
-                  <div class="col-md-6 p-3">
-                    <input required placeholder="phone" type="tel" name="" id="" />
-                    <div class="invalid-feedback">Please provide phone number.</div>
-                    <div class="valid-feedback">Looks good!</div>
-                  </div>
-                  <div class="col-md">
-                    <textarea required name="" placeholder="write your message" id="" cols="30" rows="1"></textarea>
-                    <div class="invalid-feedback">Please provide a message.</div>
-                    <div class="valid-feedback">Looks good!</div>
-                  </div>
-                  <div class="text-end mt-4">
-                    <input class="btn px-4 py-3 btn-outline-dark" type="submit" value="Send Message" />
-                  </div>
-                </form>
-              </div>
-              <div class="col-lg-4 col-md-12 text-white aside px-4 py-5 d-flex align-items-center">
-                <div class="mb-5">
-                  <h1 class="h3">Feedback Form</h1>
-                  <p class="opacity-50">
-                    <small>
-                      Give us your valuable feedback to improve our services
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- feedback from end -->
-
-      <!--carousel-start-->
-      <!-- <div class="banner slider pt-4">
-        <div
-          id="carousel"
-          class="carousel slide carousel-dark carousel-fade"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner" data-bs-ride="carousel">
-            {% for images in data %}
-            <div
-              class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}"
-              data-bs-interval="3000"
-            >
-              <img
-                src="{{ images.photo.url }}"
-                class="d-block w-100"
-                alt="Los Angeles"
-              />
-              <div class="carousel-caption">
-                <div class="col-md-7">
-                  <h1 class="pb-2 text-primary">
-                    Hey <span class="text-uppercase">{{username}}</span> Welcome
-                    to tax calculator
-                  </h1>
-                  <h4 class="text-info">
-                    Be righteous to the nation, pay income tax
-                  </h4>
-                  <button type="button" class="btn btn-success mt-4">
-                    <a class="text-decoration-none text-light" href="#class1"
-                      >Calculate now</a
-                    >
-                  </button>
-                  <button type="button" class="btn btn-dark mt-4">
-                    <a class="text-decoration-none text-light" href="#class2"
-                      >Savings Guide</a
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-
-          <a
-            class="carousel-control-prev"
-            href="#carousel"
-            data-bs-slide="prev"
-            data-bs-target="#carousel"
-          >
-            <span class="carousel-control-prev-icon"></span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carousel"
-            data-bs-slide="next"
-            data-bs-target="#carousel"
-          >
-            <span class="carousel-control-next-icon"></span>
-          </a>
-        </div>
-      </div> -->
-      <!--	carousel-end-->
-
       <!--footer start-->
       <div class="footer py-5">
         <div class="container">
@@ -1010,7 +916,7 @@
           </div>
         </div>
       </div>
-      <div class="copyright bglight1 border pt-2">
+      <div class="copyright border pt-2">
         <div class="container">
           <div class="row justify-content-md-center">
             <p>© 2023 Tax Calc Software Pvt. Ltd.</p>
@@ -1057,6 +963,11 @@
 ></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  $('#my_form').submit(function(){
+    $("#my_form :disabled").removeAttr('disabled');
+});
+</script>
+<script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function () {
     "use strict";
@@ -1080,6 +991,16 @@
       );
     });
   })();
+</script>
+<script>
+  function allowOnlyNumbers(e) {
+  const charCode = e.which || e.keyCode;
+  if (charCode >= 48 && charCode <= 57) {
+    return true;
+  }
+  alert("Please enter only positive numbers");
+  return false;
+}
 </script>
 <script
   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

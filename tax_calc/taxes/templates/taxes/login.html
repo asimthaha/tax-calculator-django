@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{% static 'taxes/css/login.css' %}" />
   </head>
   <body>
+    <div class="d-flex justify-content-end admin">
+      <span>
+        <a href="{% url 'admin:index' %}"
+          ><i class="bi bi-person-circle bi-4x"></i
+        ></a>
+      </span>
+    </div>
     <div class="container">
       <div class="d-flex justify-content-center h-100">
         <div class="card">
@@ -19,7 +26,13 @@
             </div>
           </div>
           <div class="card-body">
-            <form>
+            <form
+              method="POST"
+              action="{% url 'taxes:login' %}"
+              class="needs-validation"
+              novalidate
+            >
+              {% csrf_token %}
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
@@ -27,24 +40,29 @@
                   ></span>
                 </div>
                 <input
-                  id="username"
+                  name="name"
+                  id="name"
                   type="text"
                   class="form-control"
                   placeholder="username"
                 />
               </div>
-              <div class="input-group form-group">
+              <div class="input-group form-group" id="pass1">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
                     ><i class="bi bi-emoji-smile-fill"></i
                   ></span>
                 </div>
                 <input
+                  name="password"
                   type="password"
                   id="password"
                   class="form-control"
                   placeholder="password"
                 />
+                <div class="input-group-text bg-warning">
+                  <a href=""><i class="bi bi-eye-slash-fill text-dark"></i></a>
+                </div>
               </div>
               <div class="form-group">
                 <input
@@ -56,7 +74,7 @@
             </form>
           </div>
           <div class="card-footer">
-            <div class="d-flex justify-content-center links">
+            <div class="d-flex justify-content-center mb-5">
               <p>Don't have an account?</p>
               <a href="{% url 'taxes:register' %}" class="text-primary-emphasis"
                 >Sign Up</a
@@ -71,5 +89,21 @@
       <div class="wave"></div>
       <div class="wave"></div>
     </div>
+    <script>
+      $(document).ready(function () {
+        $("#pass1 a").on("click", function (event) {
+          event.preventDefault();
+          if ($("#pass1 input").attr("type") == "text") {
+            $("#pass1 input").attr("type", "password");
+            $("#pass1 i").addClass("bi bi-eye-fill-slash");
+            $("#pass1 i").removeClass("bi-eye");
+          } else if ($("#pass1 input").attr("type") == "password") {
+            $("#pass1 input").attr("type", "text");
+            $("#pass1 i").removeClass("bi bi-eye-fill-slash");
+            $("#pass1 i").addClass("bi-eye");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
