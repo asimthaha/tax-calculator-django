@@ -1,5 +1,5 @@
 from django.contrib import admin
-from jazzmin.utils import attr
+from admincharts.admin import AdminChartMixin
 from .models import (
     UserDetails,
     TaxDetails,
@@ -10,27 +10,19 @@ from .models import (
 )
 
 # Register your models here.
-
-
 @admin.register(TaxDetails)
-class TaxDetailsAdmin(admin.ModelAdmin):
-    list_display = ('financial_year', 'regime', 'age_group',"total_tax")
-    list_filter = ('regime', 'age_group')
-    
-    fieldsets = (
-        (None, {
-            'fields': ('financial_year', 'age_group', 'category_emp_or_pen','regime')
-        }),
-        ('Income', {
-            'fields': ('salary_income', 'other_income','total_tax')
-        }),
-        ('Deductions', {
-            'fields': ('standard_deduction', 'professional_tax','house_rent_exemption','home_loan', 'deductions_u_80c','nps_u_80c',)
-        }),
-        ('Taxable', {
-            'fields': ('taxable_income', 'tax_on_taxable_income','rebate_u_87a','surcharge_on_tax', 'education_cess')
-        }),
-    )
+class TaxDetailsChartModel(AdminChartMixin, admin.ModelAdmin):
+    list_display = ('name', 'financial_year', 'age_group', 'category_emp_or_pen', 'regime', 'salary_income',
+                    'other_income', 'standard_deduction', 'professional_tax', 'house_rent_exemption',
+                    'home_loan', 'deductions_u_80c', 'nps_u_80c', 'taxable_income', 'tax_on_taxable_income',
+                    'rebate_u_87a', 'surcharge_on_tax', 'education_cess', 'total_tax')
+    list_filter = ('financial_year', 'age_group', 'category_emp_or_pen', 'regime')
+    search_fields = ('name', 'financial_year', 'age_group', 'category_emp_or_pen', 'regime')
+
+    list_chart_type = "bar"
+    list_chart_data = {"name":"name",}
+    list_chart_options = {"aspectRatio": 6}
+    list_chart_config = None
 
 @admin.register(TaxSlabRates)
 class TaxSlabRatesAdmin(admin.ModelAdmin):
@@ -52,9 +44,8 @@ class CarouselImagesAdmin(admin.ModelAdmin):
 class UserDetails(admin.ModelAdmin):
     list_display = ("name","email")
     list_filter = ("zipcode","name")
-    
-@admin.register(UserFeedback)  
+
+@admin.register(UserFeedback)
 class UserFeedbackAdmin(admin.ModelAdmin):
    list_display = ("name","email")
    list_filter = ("description","name")
-   

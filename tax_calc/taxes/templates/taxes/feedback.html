@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Tax Calc</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -26,6 +27,47 @@
     />
   </head>
   <body>
+  <nav class="navbar navbar-expand-sm bg-light border">
+      <div class="container">
+        <!-- Brand -->
+        <article class="row">
+          <a class="navbar-brand d-flex align-items-center" href="/index">
+            <section>
+              <video width="150" height="150" autoplay muted>
+                <source
+                  src="{% static 'taxes/videos/logo_video.mp4' %}"
+                  type="video/mp4"
+                />
+              </video>
+            </section>
+            <section class="col mx-auto pl-5">
+              <div>
+                <span class="text-danger h2">TAX</span
+                ><span class="text-dark h2">CALC</span>
+              </div>
+            </section>
+          </a>
+        </article>
+        <!-- Navbar links -->
+        <nav id="navbar">
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+              </li>
+              <!--<form class="form-inline" action="#">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
+              <button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Search</button>
+            </form>-->
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </nav>
+    <!--end-header-->
     <!-- feedback from start -->
     <section class="feedback">
       <div class="d-flex">

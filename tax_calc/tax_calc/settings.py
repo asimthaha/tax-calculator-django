@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'jazzmin',
     'admin_tools_stats',  # this must be BEFORE 'admin_tools' and 'django.contrib.admin'
     'django_nvd3',
+    "admincharts",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,7 +129,6 @@ MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 #JAZZMIN_SETTINGS
 

@@ -1,12 +1,10 @@
 <html lang="en" data-bs-theme="dark">
   {% load static %}
   <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
-  <script
-    src="{% static 'taxes/js/script.js' %}"
-    type="text/javascript"
-  ></script>
-
   <head>
+    <meta charset="UTF-8" />
+    <title>Tax Calc</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       rel="stylesheet"
@@ -34,48 +32,12 @@
     />
     <!------ Include the above in your HEAD tag ---------->
   </head>
-  <body">
-    <div class="top-head pt-1 border">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-right">
-            <div class="dropdown">
-              <button
-                class="btn btn-light dropdown-toggle text-primary m-3"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user"></i>
-                My Account
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item"
-                    ><span class="text-uppercase">{{name}}</span></a
-                  >
-                </li>
-                <!--						<li><a class="dropdown-item" href="#">Edit Account</a></li>-->
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                  <a
-                    onclick="return confirm('Are you sure you want to Logout')"
-                    class="dropdown-item"
-                    href="/login"
-                    >Logout</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-sm bg-light border"> 
+  <body>
+   <nav class="navbar navbar-dark navbar-expand-sm">
       <div class="container">
         <!-- Brand -->
         <article class="row">
-          <a class="navbar-brand d-flex align-items-center" href="/">
+          <a class="navbar-brand d-flex align-items-center" href="/index">
             <section>
               <video width="150" height="150" autoplay muted>
                 <source
@@ -93,7 +55,8 @@
           </a>
         </article>
         <!-- Navbar links -->
-        <nav id="navbar">
+        <article>
+          <nav id="navbar">
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
@@ -121,6 +84,36 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+              </li>
+              <li>
+                <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle text-primary mx-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user"></i>
+                My Account
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item"
+                    ><span class="text-uppercase">{{name}}</span></a
+                  >
+                </li>
+                <!--						<li><a class="dropdown-item" href="#">Edit Account</a></li>-->
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                  <a
+                    onclick="return confirm('Are you sure you want to Logout')"
+                    class="dropdown-item"
+                    href="/"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
               </li>
               <li">
                 <a
@@ -203,6 +196,176 @@
             </ul>
           </div>
         </nav>
+        </article>
+
+      </div>
+    </nav>
+    <!--end-header-->
+    <nav class="navbar fixed-top navbar-expand-sm" style="background-color:#5cdb95">
+      <div class="container">
+        <!-- Brand -->
+        <article class="row">
+          <a class="navbar-brand d-flex align-items-center" href="/index">
+            <section>
+              <video width="150" height="150" autoplay muted>
+                <source
+                  src="{% static 'taxes/videos/logo_video.mp4' %}"
+                  type="video/mp4"
+                />
+              </video>
+            </section>
+            <section class="col mx-auto pl-5">
+              <div>
+                <span class="text-danger h2">TAX</span
+                ><span class="text-dark h2">CALC</span>
+              </div>
+            </section>
+          </a>
+        </article>
+        <!-- Navbar links -->
+        <article>
+          <nav id="navbar">
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link scroll text-primary"
+                  href="#class1"
+                  data-toggle="dropdown"
+                >
+                  Calculator
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link text-primary"
+                  href="#class2"
+                >
+                  Savings Guide
+                </a>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="#class3">Slab Rates</a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+              </li>
+              <li>
+                <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle text-primary mx-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa fa-user"></i>
+                My Account
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item"
+                    ><span class="text-uppercase">{{name}}</span></a
+                  >
+                </li>
+                <!--						<li><a class="dropdown-item" href="#">Edit Account</a></li>-->
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                  <a
+                    onclick="return confirm('Are you sure you want to Logout')"
+                    class="dropdown-item"
+                    href="/"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+              </li>
+              <li">
+                <a
+                  role="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                  class="btn btn-outline-primary position-relative mr-3"
+                >
+                <i class="bi bi-bell-fill"></i>
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger"
+                  >
+                    <span class="visually-hidden">unread messages</span>
+                    <!--								{{noti_count}}-->
+                  </span>
+                </a>
+
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    {{forloop.counter}}
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title text-uppercase"
+                          id="exampleModalLabel"
+                        >
+                          New message: {{name}}
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <p>No Notifications</p>
+                      {% for car in enquiry_data %}
+                      <div
+                        class="modal-body border  border-2 m-1"
+                      >
+                        <div class="mb-3">
+                          <label class="col-form-label">
+                            <span class="text-uppercase"
+                              >{{car.interested_user_id}}</span
+                            >
+                            made an interest
+                          </label>
+                          <div>
+                            Interested car:
+                            <span class="text-uppercase">{{car.car_id}}</span>
+                          </div>
+                        </div>
+                        <div>Phone: {{car.message}}</div>
+                      </div>
+                      {% endfor %}
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!--<form class="form-inline" action="#">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
+              <button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Search</button>
+            </form>-->
+            </ul>
+          </div>
+        </nav>
+        </article>
+
       </div>
     </nav>
     <!--end-header-->
@@ -331,6 +494,7 @@
                     tabindex="1"
                     class="form-control"
                     min="1"
+                    onfocus="replaceZero()"
                     onkeypress="return allowOnlyNumbers(event)"
                     oninput="taxCalculate()"
                     placeholder="Income from salary *"
@@ -343,7 +507,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Standard Deduction<span class="required-asterisk">*</span>
+                  >Standard Deduction
                 </label>
                 <div class="form-group">
                   <input
@@ -366,7 +530,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Deduction /s 80C<span class="required-asterisk">*</span>
+                  >Deduction /s 80C
                 </label>
                 <div class="form-group">
                   <input
@@ -387,7 +551,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Taxable income<span class="required-asterisk">*</span>
+                  >Taxable income
                 </label>
                 <div class="form-group">
                   <input
@@ -407,7 +571,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Surcharge<span class="required-asterisk">*</span>
+                  >Surcharge
                 </label>
                 <div class="form-group">
                   <input
@@ -430,7 +594,7 @@
             <section class="col-md-4 d-flex align-items-center flex-column">
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Other Income<span class="required-asterisk">*</span>
+                  >Other Income
                 </label>
                 <div class="form-group">
                   <input
@@ -451,7 +615,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Professional Tax<span class="required-asterisk">*</span>
+                  >Professional Tax
                 </label>
                 <div class="form-group">
                   <input
@@ -473,7 +637,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >NPS u/s 80CCD(1 B)<span class="required-asterisk">*</span>
+                  >NPS u/s 80CCD(1 B)
                 </label>
                 <div class="form-group">
                   <input
@@ -494,7 +658,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Tax on taxable<span class="required-asterisk">*</span>
+                  >Tax on taxable
                 </label>
                 <div class="form-group">
                   <input
@@ -512,7 +676,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Education Cess<span class="required-asterisk">*</span>
+                  >Education Cess
                 </label>
                 <div class="form-group">
                   <input
@@ -533,7 +697,7 @@
             <section class="col-md-4 d-flex align-items-center flex-column">
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Total Tax<span class="required-asterisk">*</span>
+                  >Total Tax
                 </label>
                 <div class="form-group">
                   <input
@@ -554,7 +718,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >HRA Exemption<span class="required-asterisk">*</span>
+                  >HRA Exemption
                 </label>
                 <div class="form-group">
                   <input
@@ -576,7 +740,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Home Loan Int U/s 24<span class="required-asterisk">*</span>
+                  >Home Loan Int U/s 24
                 </label>
                 <div class="form-group">
                   <input
@@ -598,7 +762,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Tax rebate<span class="required-asterisk">*</span>
+                  >Tax rebate
                 </label>
                 <div class="form-group">
                   <input
@@ -616,7 +780,7 @@
               </div>
               <div class="form-element">
                 <label class="form-label text-primary"
-                  >Tax Payable<span class="required-asterisk">*</span>
+                  >Tax Payable
                 </label>
                 <div class="form-group">
                   <input
@@ -994,12 +1158,12 @@
 </script>
 <script>
   function allowOnlyNumbers(e) {
-  const charCode = e.which || e.keyCode;
-  if (charCode >= 48 && charCode <= 57) {
-    return true;
-  }
-  alert("Please enter only positive numbers");
-  return false;
+    const charCode = e.which || e.keyCode;
+    if (charCode >= 48 && charCode <= 57) {
+      return true;
+    }
+    alert("Please enter only positive numbers");
+    return false;
 }
 </script>
 <script

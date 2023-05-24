@@ -1,15 +1,15 @@
 from django.urls import path,include
-from . import views
+from .views import *
 
 app_name = "taxes"
 
 urlpatterns = [
-    path("", views.index_requestView, name="index"),
-    path("register", views.register_requestView, name="register"),
-    path("login", views.login_requestView, name="login"),
-    # path("logout", views.logout_view, name='base'),
-    path("base", views.base_requestView, name="base"),
-    path("feedback", views.feedback_requestView, name="feedback"),
-    path("saved_records",views.saved_recordsl_requestView, name="saved_records"),
-    path("del_records", views.del_records_requestView, name="del_records"),
+    path("index", IndexView.as_view(), name="index"),
+    path("base", BaseView.as_view(), name="base"),
+    path("feedback", FeedbackView.as_view(), name="feedback"),
+    path("del_records", DeleteRecordsView.as_view(), name="del_records"),
+    path("saved_records", SavedRecordsView.as_view(), name="saved_records"),
+    path("register", RegisterView.as_view(), name="register"),
+    path("", LoginRequestView.as_view(), name="login"),
+    path("logout", LogoutView.as_view(), name="logout"),
 ]

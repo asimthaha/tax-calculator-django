@@ -1,5 +1,8 @@
 <html lang="en">
+{% load static %}
   <head>
+    <title>Tax Calc</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,8 +36,50 @@
       }
     </style>
   </head>
-  <body class="container">
-    <section class="row d-flex">
+  <body class="">
+      <nav class="navbar navbar-expand-sm bg-light border">
+      <div class="container">
+        <!-- Brand -->
+        <article class="row">
+          <a class="navbar-brand d-flex align-items-center" href="/index">
+            <section>
+              <video width="150" height="150" autoplay muted>
+                <source
+                  src="{% static 'taxes/videos/logo_video.mp4' %}"
+                  type="video/mp4"
+                />
+              </video>
+            </section>
+            <section class="col mx-auto pl-5">
+              <div>
+                <span class="text-danger h2">TAX</span
+                ><span class="text-dark h2">CALC</span>
+              </div>
+            </section>
+          </a>
+        </article>
+        <!-- Navbar links -->
+        <nav id="navbar">
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+              </li>
+              <!--<form class="form-inline" action="#">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
+              <button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Search</button>
+            </form>-->
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </nav>
+    <!--end-header-->
+      <main class="container">
+        <section class="row d-flex">
       <div class="d-flex" id="class2">
         <h3 class="text-primary mx-auto p-5 m-2">Tax Records</h3>
       </div>
@@ -59,11 +104,8 @@
                 <!-- Button trigger modal -->
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                  Read more
+                  Details
                 </button>
-                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-danger">
-                  <i class="bi bi-trash-fill"></i>
-                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -141,14 +183,19 @@
                 </div>
               </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex justify-content-end">
               <h5>Total Tax: {{records.total_tax}}</h5>
+                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-danger mx-2">
+                  <i class="bi bi-trash-fill"></i>
+                </a>
             </div>
           </div>
         </div>
       </article>
       {% endfor %}
     </section>
+      </main>
+
     <script>
       var popoverTriggerList = [].slice.call(
         document.querySelectorAll('[data-bs-toggle="popover-test"]')

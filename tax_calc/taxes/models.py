@@ -17,7 +17,6 @@ class UserDetails(models.Model):
 
 
 class TaxDetails(models.Model):
-    
     REGIME_STATUS = (
         ("New Regime", "New Regime"),
         ("Old Regime", "Old Regime"),
@@ -29,34 +28,34 @@ class TaxDetails(models.Model):
         ("60 to 80", "60 to 80"),
         ("Above 80", "Above 80"),
     )
-    
+
     CATEGORY = (
         ("Employee/Pensioner", "Employee/Pensioner"),
-        ("Other","Other")
+        ("Other", "Other")
     )
-    
-    FINANCIAL_YEAR =(
+
+    FINANCIAL_YEAR = (
         ("2023-2022", "2023-2022"),
         ("2022-2021", "2022-2021"),
         ("2021-2020", "2021-2020"),
     )
-    
+
     name = models.ForeignKey(UserDetails, on_delete=models.CASCADE, default=True)
-    financial_year = models.CharField(max_length=20 ,blank=True,null=True,
-        choices=FINANCIAL_YEAR,
-        default="s",
-        help_text="Age Group of People")
-    age_group = models.CharField(max_length=5,blank=True,null=True,
-        choices=AGE_GROUP,
-        default="s",
-        help_text="Age Group of People")
-    category_emp_or_pen = models.CharField(max_length=30,blank=True,null=True,
-        choices=CATEGORY,
-        default="Employee/Pensioner/",
-        help_text="Category of People",)
-    regime = models.CharField(max_length=20,blank=True,null=True,choices=REGIME_STATUS,
-        default=True,
-        help_text="regime status new or old")
+    financial_year = models.CharField(max_length=20, blank=True, null=True,
+                                      choices=FINANCIAL_YEAR,
+                                      default="s",
+                                      help_text="Financial Year")
+    age_group = models.CharField(max_length=5, blank=True, null=True,
+                                 choices=AGE_GROUP,
+                                 default="s",
+                                 help_text="Age Group of People")
+    category_emp_or_pen = models.CharField(max_length=30, blank=True, null=True,
+                                           choices=CATEGORY,
+                                           default="Employee/Pensioner/",
+                                           help_text="Category of People", )
+    regime = models.CharField(max_length=20, blank=True, null=True, choices=REGIME_STATUS,
+                              default=True,
+                              help_text="regime status new or old")
 
     salary_income = models.IntegerField(null=True, blank=True)
     other_income = models.IntegerField(null=True, blank=True)
@@ -74,10 +73,10 @@ class TaxDetails(models.Model):
     surcharge_on_tax = models.IntegerField(null=True, blank=True)
     education_cess = models.IntegerField(null=True, blank=True)
     total_tax = models.IntegerField(null=True, blank=True)
-    
+
     def __str__(self):
         return self.regime
-    
+
     regime = models.CharField(
         max_length=20,
         choices=REGIME_STATUS,
@@ -94,11 +93,12 @@ class TaxDetails(models.Model):
         help_text="Age Group of People",
     )
 
+
 class UserFeedback(models.Model):
     name = models.ForeignKey(UserDetails, on_delete=models.CASCADE, default=False)
-    email = models.EmailField(max_length=254,null=True,blank=True)
-    description = models.CharField(max_length=200,null=True,blank=True)
-    
+    email = models.EmailField(max_length=254, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+
     def __str__(self):
         return self.description
 
@@ -110,11 +110,12 @@ class CarouselImages(models.Model):
     def __str__(self):
         return self.description
 
+
 class TaxSavingsGuide(models.Model):
     photo = models.ImageField(upload_to="photo", blank=True, null=True)
     card_title = models.CharField(max_length=50)
     card_description = models.CharField(max_length=200)
-    
+
     def __str__(self):
         return self.card_title
 

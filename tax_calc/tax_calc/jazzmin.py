@@ -15,11 +15,10 @@ JAZZMIN_SETTINGS = {
     "login_logo": "..\taxes\static\taxes\images\logo.png",
 
     # Logo to use for login form in dark themes (defaults to login_logo)
-    #"login_logo_dark": None,
+    # "login_logo_dark": None,
 
     # CSS classes that are applied to the logo above
     "site_logo_classes": "..\taxes\static\taxes\images\logo.png",
-
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
     "site_icon": None,
@@ -45,7 +44,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
         {"name": "Support", "url": "https://github.com/asimthaha", "new_window": True},
@@ -89,8 +88,8 @@ JAZZMIN_SETTINGS = {
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [{
-            "name": "Make Messages", 
-            "url": "make_messages", 
+            "name": "Make Messages",
+            "url": "make_messages",
             "icon": "fas fa-comments",
             "permissions": ["books.view_book"]
         }]
@@ -115,7 +114,7 @@ JAZZMIN_SETTINGS = {
 
     #############
     # UI Tweaks #
-    
+
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
     "custom_css": None,
