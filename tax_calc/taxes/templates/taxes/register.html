@@ -54,6 +54,7 @@
               <form
                 method="POST"
                 action="register"
+                onsubmit="return validateConfirmPassword()"
                 class="needs-validation"
                 novalidate
               >
@@ -133,7 +134,7 @@
                     </div>
                     <div class="form-element">
                       <div class="form-group">
-                        <div class="input-group" id="pass1">
+                        <div class="input-group" id="password">
                           <div class="input-group-text bg-warning">
                             <span id="basic-addon1">Password</span>
                           </div>
@@ -159,7 +160,7 @@
                     </div>
                     <div class="form-element">
                       <div class="form-group">
-                        <div class="input-group">
+                        <div class="input-group " id="password">
                           <div class="input-group-prepend">
                             <span class="input-group-text bg-warning" id="basic-addon1">Confirm</span>
                           </div>
@@ -175,11 +176,9 @@
                           <div class="input-group-text bg-warning">
                             <a href=""><i class="bi bi-eye-slash-fill text-dark"></i></a>
                           </div>
-                          <div class="invalid-feedback">
-                            Please give the same password.
-                          </div>
-                          <div class="valid-feedback">Looks good!</div>
                         </div>
+                        <div class="d-flex flex-column"><span id="message" class="text-danger"></span></div>
+                        <div class="d-flex flex-column"><span id="true" class="text-success"></span></div>
                       </div>
                     </div>
                     <div class="form-element">
@@ -233,6 +232,24 @@
     });
   })();
 </script>
+<script>
+function validateConfirmPassword() {
+  // Get the values of the password and confirm password fields.
+  const password = document.getElementById("pass1").value;
+  const confirmPassword = document.getElementById("pass2").value;
+
+  // Check if the values are the same.
+  if (password !== confirmPassword) {
+    // Display an alert.
+    document.getElementById("message").innerHTML = "Passwords are not the same";  
+    return false;
+  }else {
+   document.getElementById("true").innerHTML = "Looks Good";
+  // The passwords match, so return true.
+  return true;
+  }
+}
+</script>
 <script language="Javascript" type="text/javascript">
 
 function allowOnlyLetters(e) {
@@ -248,16 +265,16 @@ function allowOnlyLetters(e) {
 </script>
 <script>
   $(document).ready(function() {
-$("#pass1 a").on('click', function(event) {
+$("#password a").on('click', function(event) {
 event.preventDefault();
-if ($('#pass1 input').attr("type") == "text") {
-$('#pass1 input').attr('type', 'password');
-$('#pass1 i').addClass("bi bi-eye-fill-slash");
-$('#pass1 i').removeClass("bi-eye");
-} else if ($('#pass1 input').attr("type") == "password") {
-$('#pass1 input').attr('type', 'text');
-$('#pass1 i').removeClass("bi bi-eye-fill-slash");
-$('#pass1 i').addClass("bi-eye");
+if ($('#password input').attr("type") == "text") {
+$('#password input').attr('type', 'password');
+$('#password i').addClass("bi bi-eye-fill-slash");
+$('#password i').removeClass("bi-eye");
+} else if ($('#password input').attr("type") == "password") {
+$('#password input').attr('type', 'text');
+$('#password i').removeClass("bi bi-eye-fill-slash");
+$('#password i').addClass("bi-eye");
 }
 });
 });

@@ -3,6 +3,10 @@
   width: fit-content, auto;
 }
 
+.form-element label {
+  color: #000;
+}
+
 .required-asterisk {
   color: #ff0000;
 }
@@ -26,6 +30,18 @@
 body {
   background-size: 800%;
   animation: animateClr 1s infinite cubic-bezier(0.62, 0.28, 0.23, 0.99);
+}
+
+header .navbar {
+  background-color: #27374d;
+}
+
+.main-body {
+  background-color: #9db2bf;
+}
+
+.DDE6ED {
+  background-color: #dde6ed;
 }
 
 .feedback input[type="text"],
@@ -67,20 +83,10 @@ body {
 }
 
 .back-to-top {
-  display: none;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background-color: #ccc;
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 24px;
-  line-height: 50px;
-  cursor: pointer;
-  z-index: 9999;
+  bottom: 25px;
+  right: 25px;
+  display: none;
 }
 
 #pass1 a,

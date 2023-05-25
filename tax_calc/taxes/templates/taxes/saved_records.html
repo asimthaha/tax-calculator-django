@@ -2,6 +2,7 @@
 {% load static %}
   <head>
     <title>Tax Calc</title>
+    <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
     <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,8 +37,9 @@
       }
     </style>
   </head>
-  <body class="">
-      <nav class="navbar navbar-expand-sm bg-light border">
+  <body class="main-body">
+  <header>
+    <nav class="navbar navbar-expand-sm border">
       <div class="container">
         <!-- Brand -->
         <article class="row">
@@ -45,15 +47,15 @@
             <section>
               <video width="150" height="150" autoplay muted>
                 <source
-                  src="{% static 'taxes/videos/logo_video.mp4' %}"
+                  src="{% static 'taxes/videos/tax_logo.mp4' %}"
                   type="video/mp4"
                 />
               </video>
             </section>
             <section class="col mx-auto pl-5">
               <div>
-                <span class="text-danger h2">TAX</span
-                ><span class="text-dark h2">CALC</span>
+                <span class="text-warning h2">TAX</span
+                ><span class="text-light h2">CALC</span>
               </div>
             </section>
           </a>
@@ -63,10 +65,7 @@
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}?id={{name}}">Feedback</a>
               </li>
               <!--<form class="form-inline" action="#">
               <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
@@ -77,17 +76,17 @@
         </nav>
       </div>
     </nav>
-    <!--end-header-->
+  </header>
+ <!--end-header-->
       <main class="container">
         <section class="row d-flex">
       <div class="d-flex" id="class2">
-        <h3 class="text-primary mx-auto p-5 m-2">Tax Records</h3>
+        <h3 class="text-dark mx-auto p-5 m-2">Tax Records</h3>
       </div>
       {% for records in saved_records %}
-      <article class="col-md-4">
+      <article class="col-md-3">
         <div
           class="card mb-3 shadow border border-2 border-success"
-          style="max-width: 540px"
         >
           <div class="row g-0">
             <div class="card-header">
@@ -130,40 +129,40 @@
                               <td>{{records.regime}}</td>
                             </tr>
                             <tr>
-                              <th scope="row">Inc0me</th>
-                              <td>{{records.income}}</td>
+                              <th scope="row">Income</th>
+                              <td>{{records.salary_income}}</td>
                               <th>Other income</th>
                               <td>{{records.other_income}}</td>
                             </tr>
                             <tr>
                               <th scope="row">Standard deduction</th>
-                              <td>{{records.std_deduction}}</td>
+                              <td>{{records.standard_deduction}}</td>
                               <th>Professional Tax</th>
-                              <td>{{records.pro_tax}}</td>
+                              <td>{{records.professional_tax}}</td>
                             </tr>
                             <tr>
                               <th scope="row">HRA</th>
-                              <td>{{records.hra}}</td>
+                              <td>{{records.house_rent_exemption}}</td>
                               <th>Home Loan</th>
                               <td>{{records.home_loan}}</td>
                             </tr>
                             <tr>
                               <th scope="row">Deductions u/s 80c</th>
-                              <td>{{records.ded_80c}}</td>
+                              <td>{{records.deductions_u_80c}}</td>
                               <th>NPS</th>
-                              <td>{{records.nps}}</td>
+                              <td>{{records.nps_u_80c}}</td>
                             </tr>
                             <tr>
                               <th scope="row">Taxable Income</th>
                               <td>{{records.taxable_income}}</td>
                               <th>Tax on Taxable</th>
-                              <td>{{records.tax_on_taxable}}</td>
+                              <td>{{records.tax_on_taxable_income}}</td>
                             </tr>
                             <tr>
                               <th scope="row">Rebate u/s 87a</th>
-                              <td>{{records.rebate}}</td>
+                              <td>{{records.rebate_u_87a}}</td>
                               <th>Surcharge</th>
-                              <td>{{records.surcharge}}</td>
+                              <td>{{records.surcharge_on_tax}}</td>
                             </tr>
                             <tr>
                               <th scope="row">Education cess</th>
@@ -185,14 +184,166 @@
             </div>
             <div class="card-footer d-flex justify-content-end">
               <h5>Total Tax: {{records.total_tax}}</h5>
-                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-danger mx-2">
-                  <i class="bi bi-trash-fill"></i>
+                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-dark mx-2">
+                  <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                  <lord-icon
+                      src="https://cdn.lordicon.com/jmkrnisz.json"
+                      trigger="morph"
+                      colors="primary:#c71f16"
+                      state="morph-erase"
+                      style="width:25px;height:25px">
+                  </lord-icon>
                 </a>
             </div>
           </div>
         </div>
       </article>
       {% endfor %}
+    </section>
+    <section class="bg-light my-5 d-flex row">
+      <div class="d-flex">
+        <h3 class="mx-auto text-dark p-5 m-2">Analytics</h3>
+      </div>
+      <article class="col-md-6 my-5">
+        <!-- first chart -->
+      <div class="col">
+        <canvas id="firstchart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const one = document.getElementById('firstchart');
+      
+        new Chart(one, {
+          type: 'line',
+          data: {
+            labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+            datasets: [{
+              label: ["Income"],
+              data: [{% for records in saved_records %} '{{records.salary_income}}', {% endfor %}],
+              borderWidth: 3
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      </article>
+      <article class="col-md-6 my-5">
+        <!-- second chart -->
+        <div class="col">
+          <canvas id="secondchart"></canvas>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+          const two = document.getElementById('secondchart');
+        
+          new Chart(two, {
+            type: 'bar',
+            data: {
+              labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+              datasets: [{
+                label: ["Total Tax"],
+                data: [{% for records in saved_records %} '{{records.total_tax}}', {% endfor %}],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        </script>
+      </article>
+      <article class="col-md-6 my-5">
+        <!-- third chart -->
+        <div class="col">
+          <canvas id="thirdchart"></canvas>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+          const three = document.getElementById('thirdchart');
+        
+          new Chart(three, {
+            type: 'radar',
+            data: {
+              labels: [{% for records in saved_records %} '{{records.age_group}}', {% endfor %}],
+              datasets: [{
+                label: 'Taxble Income',
+                data: [{% for records in saved_records %} '{{records.taxable_income}}', {% endfor %}],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+              }, {
+                label: 'Tax_on_taxable_income',
+                data: [{% for records in saved_records %} '{{records.tax_on_taxable_income}}', {% endfor %}],
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)'
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: false
+                }
+              }
+            }
+          });
+        </script>
+      </article>
+      <article class="col-md-6 my-5">
+        <!-- fourth chart -->
+        <div class="col">
+          <canvas id="fourthchart"></canvas>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+          const four = document.getElementById('fourthchart');
+        
+          new Chart(four, {
+            type: 'doughnut',
+            data: {
+              labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+              datasets: [{
+                label: ["Total Tax"],
+                data: [{% for records in saved_records %} '{{records.total_tax}}', {% endfor %}],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        </script>
+      </article>
     </section>
       </main>
 

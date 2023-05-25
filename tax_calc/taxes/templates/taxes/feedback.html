@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tax Calc</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'taxes/images/logo.png' %}"
+    />
     <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -26,8 +31,9 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-  <nav class="navbar navbar-expand-sm bg-light border">
+  <body class="main-body">
+  <header>
+    <nav class="navbar navbar-expand-sm border">
       <div class="container">
         <!-- Brand -->
         <article class="row">
@@ -35,15 +41,15 @@
             <section>
               <video width="150" height="150" autoplay muted>
                 <source
-                  src="{% static 'taxes/videos/logo_video.mp4' %}"
+                  src="{% static 'taxes/videos/tax_logo.mp4' %}"
                   type="video/mp4"
                 />
               </video>
             </section>
             <section class="col mx-auto pl-5">
               <div>
-                <span class="text-danger h2">TAX</span
-                ><span class="text-dark h2">CALC</span>
+                <span class="text-warning h2">TAX</span
+                ><span class="text-light h2">CALC</span>
               </div>
             </section>
           </a>
@@ -53,10 +59,11 @@
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link text-primary" href="{% url 'taxes:saved_records' %}?name={{name}}">All Records</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}">Feedback</a>
+                <a
+                  class="nav-link text-primary"
+                  href="{% url 'taxes:feedback' %}"
+                  >Feedback</a
+                >
               </li>
               <!--<form class="form-inline" action="#">
               <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
@@ -68,12 +75,14 @@
       </div>
     </nav>
     <!--end-header-->
+  </header>
+
     <!-- feedback from start -->
     <section class="feedback">
       <div class="d-flex">
-        <h2 class="text-primary mx-auto p-5 m-2">Feedback form</h2>
+        <h2 class="text-dark mx-auto p-5 m-2">Feedback form</h2>
       </div>
-      <div class="container border border-2 shadow rounded">
+      <div class="container border border-2 shadow rounded mb-5">
         <div class="bg-light">
           <div class="row">
             <div class="col-lg-8 col-md-12 p-5 bg-white rounded-3">
@@ -124,11 +133,23 @@
                 </div>
                 <div></div>
                 <div class="text-end mt-4">
-                  <input
-                    class="btn px-4 py-3 btn-outline-dark"
-                    type="submit"
-                    value="Send Message"
-                  />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                      <lord-icon
+                        src="https://cdn.lordicon.com/rhvddzym.json"
+                        trigger="hover"
+                        colors="primary:#66a1ee,secondary:#08a88a"
+                        style="width: 40px; height: 40px"
+                      >
+                      </lord-icon>
+                    </span>
+                    <input
+                      class="btn px-4 py-3 btn-outline-dark"
+                      type="submit"
+                      value="Send Message"
+                    />
+                  </div>
                 </div>
               </form>
             </div>

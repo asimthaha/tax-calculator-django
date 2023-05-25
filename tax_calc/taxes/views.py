@@ -36,7 +36,8 @@ class IndexView(View):
         id = request.session['id']
         name = request.session['name']
 
-        context = {"guide": guide, "slab_rates": slab_rates, "name": name}
+        context = {'id': id, 'name': name,
+                   "guide": guide, "slab_rates": slab_rates, "name": name}
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -83,7 +84,7 @@ class FeedbackView(View):
         message = request.POST.get('message')
 
         UserFeedback(name=name, email=email, description=message).save()
-        return redirect("/")
+        return redirect("/feedback")
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -91,14 +92,6 @@ class FeedbackView(View):
             "taxes/feedback.html"
         )
 
-
-class DeleteRecordsView(View):
-    def get(self, request):
-        user_id = request.GET.get('id')
-        name = UserDetails.objects.get(user_id=user_id)
-        records = TaxDetails.objects.get(name=name)
-        records.delete()
-        return redirect('/index')
 
 
 class BaseView(View):
@@ -134,10 +127,21 @@ class LogoutView(View):
 
 
 class SavedRecordsView(View):
-
     def get(self, request, *args, **kwargs):
-        name = request.session['name']
-        id = request.session['id']
-        saved_records = TaxDetails.objects.all()
-        context = {"saved_records": saved_records}
+
+        id = request.GET.get("id")
+        name = UserDetails.objects.get(name=id)
+        saved_records = TaxDetails.objects.filter(name=name)
+        
+        
+        context = {"saved_records": saved_records,}
         return render(request, "taxes/saved_records.html", context)
+
+
+class DeleteRecordsView(View):
+    def get(self, request):
+        user_id = request.GET.get('id')
+        name = UserDetails.objects.get(user_id=user_id)
+        records = TaxDetails.objects.get(name=name)
+        records.delete()
+        return redirect('/saved_records')

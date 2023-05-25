@@ -19,10 +19,6 @@ class TaxDetailsChartModel(AdminChartMixin, admin.ModelAdmin):
     list_filter = ('financial_year', 'age_group', 'category_emp_or_pen', 'regime')
     search_fields = ('name', 'financial_year', 'age_group', 'category_emp_or_pen', 'regime')
 
-    list_chart_type = "bar"
-    list_chart_data = {"name":"name",}
-    list_chart_options = {"aspectRatio": 6}
-    list_chart_config = None
 
 @admin.register(TaxSlabRates)
 class TaxSlabRatesAdmin(admin.ModelAdmin):

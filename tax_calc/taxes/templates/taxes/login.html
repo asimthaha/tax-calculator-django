@@ -4,20 +4,31 @@
   <head>
     <meta charset="UTF-8" />
     <title>Tax Calc</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'taxes/images/logo.png' %}">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'taxes/images/logo.png' %}"
+    />
     <link rel="stylesheet" href="{% static 'taxes/css/login.css' %}" />
   </head>
   <body>
     <div class="d-flex justify-content-end admin">
       <span>
-        <a href="{% url 'admin:index' %}"
-          ><i class="bi bi-person-circle bi-4x"></i
-        ></a>
+        <a href="{% url 'admin:index' %}">
+          <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+          <lord-icon
+            src="https://cdn.lordicon.com/vusrdugn.json"
+            trigger="hover"
+            colors="primary:#121331,secondary:#913710,tertiary:#30e8bd,quaternary:#f9c9c0,quinary:#e83a30"
+            style="width: 50px; height: 50px"
+          >
+          </lord-icon>
+        </a>
       </span>
     </div>
     <div class="container">
       <div class="d-flex justify-content-center h-100">
-        <div class="card">
+        <div class="card mt-5">
           <div class="card-header">
             <h3>Sign In</h3>
             <div class="d-flex justify-content-end social_icon">
@@ -77,7 +88,7 @@
           <div class="card-footer">
             <div class="d-flex justify-content-center mb-5">
               <p>Don't have an account?</p>
-              <a href="{% url 'taxes:register' %}" class="text-primary-emphasis"
+              <a href="{% url 'taxes:register' %}" class="text-light"
                 >Sign Up</a
               >
             </div>

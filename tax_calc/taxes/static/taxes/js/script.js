@@ -116,13 +116,3 @@ function taxCalculate() {
     tax_on_taxable + education_cess + surcharge
   );
 }
-
-$(document).ready(function () {
-  $("input[type='text']").on("input", function () {
-    var num = $(this).val().replace(/,/g, "");
-    if (num) {
-      num = parseInt(num).toLocaleString("en");
-      $(this).val(num);
-    }
-  });
-});
