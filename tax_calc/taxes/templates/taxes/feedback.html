@@ -32,55 +32,55 @@
     />
   </head>
   <body class="main-body">
-  <header>
-    <nav class="navbar navbar-expand-sm border">
-      <div class="container">
-        <!-- Brand -->
-        <article class="row">
-          <a class="navbar-brand d-flex align-items-center" href="/index">
-            <section>
-              <video width="150" height="150" autoplay muted>
-                <source
-                  src="{% static 'taxes/videos/tax_logo.mp4' %}"
-                  type="video/mp4"
-                />
-              </video>
-            </section>
-            <section class="col mx-auto pl-5">
-              <div>
-                <span class="text-warning h2">TAX</span
-                ><span class="text-light h2">CALC</span>
-              </div>
-            </section>
-          </a>
-        </article>
-        <!-- Navbar links -->
-        <nav id="navbar">
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a
-                  class="nav-link text-primary"
-                  href="{% url 'taxes:feedback' %}"
-                  >Feedback</a
-                >
-              </li>
-              <!--<form class="form-inline" action="#">
+    <header>
+      <nav class="navbar navbar-expand-sm border">
+        <div class="container">
+          <!-- Brand -->
+          <article class="row">
+            <a class="navbar-brand d-flex align-items-center" href="/index">
+              <section>
+                <video width="150" height="150" autoplay muted>
+                  <source
+                    src="{% static 'taxes/videos/tax_logo.mp4' %}"
+                    type="video/mp4"
+                  />
+                </video>
+              </section>
+              <section class="col mx-auto pl-5">
+                <div>
+                  <span class="text-warning h2">TAX</span
+                  ><span class="text-light h2">CALC</span>
+                </div>
+              </section>
+            </a>
+          </article>
+          <!-- Navbar links -->
+          <nav id="navbar">
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link text-warning"
+                    href="{% url 'taxes:feedback' %}"
+                    >Feedback</a
+                  >
+                </li>
+                <!--<form class="form-inline" action="#">
               <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
               <button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Search</button>
             </form>-->
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </nav>
-    <!--end-header-->
-  </header>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </nav>
+      <!--end-header-->
+    </header>
 
     <!-- feedback from start -->
     <section class="feedback">
       <div class="d-flex">
-        <h2 class="text-dark mx-auto p-5 m-2">Feedback form</h2>
+        <h2 class="text-dark fw-bolder mx-auto p-5 m-2">Feedback form</h2>
       </div>
       <div class="container border border-2 shadow rounded mb-5">
         <div class="bg-light">

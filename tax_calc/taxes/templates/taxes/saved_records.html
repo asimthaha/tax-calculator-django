@@ -39,7 +39,7 @@
   </head>
   <body class="main-body">
   <header>
-    <nav class="navbar navbar-expand-sm border">
+    <nav class="navbar navbar-expand-sm border col-sm-12 col-xs-12">
       <div class="container">
         <!-- Brand -->
         <article class="row">
@@ -65,7 +65,7 @@
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link text-primary" href="{% url 'taxes:feedback' %}?id={{name}}">Feedback</a>
+                <a class="nav-link text-warning" href="{% url 'taxes:feedback' %}?id={{name}}">Feedback</a>
               </li>
               <!--<form class="form-inline" action="#">
               <input class="form-control mr-sm-2" type="text" placeholder="Search Cars">
@@ -81,12 +81,12 @@
       <main class="container">
         <section class="row d-flex">
       <div class="d-flex" id="class2">
-        <h3 class="text-dark mx-auto p-5 m-2">Tax Records</h3>
+        <h3 class="text-dark fw-bolder mx-auto p-5 m-2">Tax Records</h3>
       </div>
       {% for records in saved_records %}
-      <article class="col-md-3">
+      <article class="col-12 col-sm-6 col-md-3">
         <div
-          class="card mb-3 shadow border border-2 border-success"
+          class="card records mb-3 shadow border border-2 border-success"
         >
           <div class="row g-0">
             <div class="card-header">
@@ -95,14 +95,14 @@
                 class="img-fluid rounded"
                 alt="los"
               /> -->
-              <h3>{{records.regime}}</h3>
+              <h3 class="text-light">{{records.regime}}</h3>
             </div>
             <div class="col-md-8">
               <div class="card-body mb-2">
-                <h5 class="card-title font-weight-bold">{{records.age_group}}</h5>
+                <h5 class="card-title font-weight-bold text-light">{{records.age_group}}</h5>
                 <!-- Button trigger modal -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   Details
                 </button>
                 <!-- Modal -->
@@ -183,8 +183,8 @@
               </div>
             </div>
             <div class="card-footer d-flex justify-content-end">
-              <h5>Total Tax: {{records.total_tax}}</h5>
-                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-dark mx-2">
+              <h5 class="text-light">Total Tax: {{records.total_tax}}</h5>
+                <a href="{% url 'taxes:del_records' %}" type="button" role="button" class="btn btn-outline-light mx-2">
                   <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                   <lord-icon
                       src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -200,9 +200,9 @@
       </article>
       {% endfor %}
     </section>
-    <section class="bg-light my-5 d-flex row">
+    <section class="bg-light border border-1 border-success rounded my-5 d-flex row">
       <div class="d-flex">
-        <h3 class="mx-auto text-dark p-5 m-2">Analytics</h3>
+        <h3 class="mx-auto text-dark fw-bolder p-5 m-2">ANALYTICS</h3>
       </div>
       <article class="col-md-6 my-5">
         <!-- first chart -->
@@ -282,8 +282,8 @@
             data: {
               labels: [{% for records in saved_records %} '{{records.age_group}}', {% endfor %}],
               datasets: [{
-                label: 'Taxble Income',
-                data: [{% for records in saved_records %} '{{records.taxable_income}}', {% endfor %}],
+                label: 'Standard Deduction',
+                data: [{% for records in saved_records %} '{{records.standard_deduction}}', {% endfor %}],
                 fill: true,
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgb(255, 99, 132)',
@@ -327,10 +327,10 @@
           new Chart(four, {
             type: 'doughnut',
             data: {
-              labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+              labels: [{% for records in saved_records %} '{{records.age_group}}', {% endfor %}],
               datasets: [{
                 label: ["Total Tax"],
-                data: [{% for records in saved_records %} '{{records.total_tax}}', {% endfor %}],
+                data: [{% for records in saved_records %} '{{records.home_loan}}', {% endfor %}],
                 borderWidth: 1
               }]
             },

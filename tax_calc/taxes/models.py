@@ -35,27 +35,35 @@ class TaxDetails(models.Model):
     )
 
     FINANCIAL_YEAR = (
+        ("2024-2023", "2024-2023"),
         ("2023-2022", "2023-2022"),
         ("2022-2021", "2022-2021"),
         ("2021-2020", "2021-2020"),
     )
 
     name = models.ForeignKey(UserDetails, on_delete=models.CASCADE, default=True)
-    financial_year = models.CharField(max_length=20, blank=True, null=True,
-                                      choices=FINANCIAL_YEAR,
-                                      default="s",
-                                      help_text="Financial Year")
-    age_group = models.CharField(max_length=5, blank=True, null=True,
-                                 choices=AGE_GROUP,
-                                 default="s",
-                                 help_text="Age Group of People")
-    category_emp_or_pen = models.CharField(max_length=30, blank=True, null=True,
-                                           choices=CATEGORY,
-                                           default="Employee/Pensioner/",
-                                           help_text="Category of People", )
-    regime = models.CharField(max_length=20, blank=True, null=True, choices=REGIME_STATUS,
-                              default=True,
-                              help_text="regime status new or old")
+    financial_year = models.CharField(
+        max_length=20, blank=True, null=True,
+        choices=FINANCIAL_YEAR,
+        default="2024-2023",
+        help_text="Financial Year")
+    age_group = models.CharField(
+        max_length=19, blank=True, null=True,
+        choices=AGE_GROUP,
+        default="Below 60",
+        help_text="Age Group of People")
+    category_emp_or_pen = models.CharField(
+        max_length=30, blank=True, null=True,
+        choices=CATEGORY,
+        default="Employee/Pensioner",
+        help_text="Category of People", )
+    regime = models.CharField(
+        max_length=20,
+        choices=REGIME_STATUS,
+        blank=True,
+        default="New Regime",
+        help_text="regime status new or old",
+    )
 
     salary_income = models.IntegerField(null=True, blank=True)
     other_income = models.IntegerField(null=True, blank=True)
@@ -77,21 +85,6 @@ class TaxDetails(models.Model):
     def __str__(self):
         return self.regime
 
-    regime = models.CharField(
-        max_length=20,
-        choices=REGIME_STATUS,
-        blank=True,
-        default=True,
-        help_text="regime status new or old",
-    )
-
-    age_group = models.CharField(
-        max_length=20,
-        choices=AGE_GROUP,
-        blank=True,
-        default="s",
-        help_text="Age Group of People",
-    )
 
 
 class UserFeedback(models.Model):

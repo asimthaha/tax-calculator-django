@@ -41,7 +41,7 @@
       <div class="my-5">
         <h1>TAX CALCULATOR</h1>
       </div>
-    <nav class="navbar fixed-top navbar-expand-sm">
+    <nav class="navbar fixed-top navbar-expand-sm col-sm-12 col-xs-12">
       <div class="container">
         <!-- Brand -->
         <article class="row">
@@ -64,12 +64,12 @@
         </article>
         <!-- Navbar links -->
         <article>
-          <nav id="navbar">
+          <nav id="navbar" class="navbar col-sm-12 col-xs-12">
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto nav-pills">
               <li class="nav-item dropdown">
                 <a
-                  class="nav-link text-light"
+                  class="nav-link text-warning"
                   href="#class1"
                 >
                   Calculator
@@ -77,25 +77,25 @@
               </li>
               <li class="nav-item dropdown">
                 <a
-                  class="nav-link text-light"
+                  class="nav-link text-warning"
                   href="#class2"
                 >
                   Savings Guide
                 </a>
               <li class="nav-item">
-                <a class="nav-link text-light" href="#class3">Slab Rates</a>
+                <a class="nav-link text-warning" href="#class3">Slab Rates</a>
               </li>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light" href="{% url 'taxes:saved_records' %}?id={{name}}">Records</a>
+                <a class="nav-link text-warning" href="{% url 'taxes:saved_records' %}?id={{name}}">Records</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light" href="{% url 'taxes:saved_records' %}?id={{name}}">Analytics</a>
+                <a class="nav-link text-warning" href="{% url 'taxes:saved_records' %}?id={{name}}">Analytics</a>
               </li>
               <li>
                 <div class="dropdown">
                 <button
-                  class="btn btn-dark dropdown-toggle text-light mx-1"
+                  class="btn btn-dark dropdown-toggle text-warning mx-1"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -110,14 +110,14 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'taxes:feedback' %}">Feedback<i class="mx-2 text-primary bi bi-chat-left-text-fill"></i></a>
+                    <a class="dropdown-item" href="{% url 'taxes:feedback' %}">Feedback<i class="mx-2 text-warning bi bi-chat-left-text-fill"></i></a>
                   </li>
                   <li>
                     <a
                       onclick="return confirm('Are you sure you want to Logout')"
                       class="dropdown-item"
                       href="/"
-                      >Logout<i class="mx-2 bi bi-box-arrow-right text-primary"></i></a
+                      >Logout<i class="mx-2 bi bi-box-arrow-right text-warning"></i></a
                     >
                 </li>
               </ul>
@@ -135,7 +135,7 @@
                 <lord-icon
                     src="https://cdn.lordicon.com/msetysan.json"
                     trigger="hover"
-                    colors="primary:#ffffff"
+                    colors="primary:#f9c710"
                     style="width:25px;height:25px">
                 </lord-icon>
                 <span
@@ -217,7 +217,7 @@
     <!--	calculator start-->
     <section>
       <div class="d-flex">
-        <h3 class="text-dark mx-auto p-5 m-2">
+        <h3 class="text-dark fw-bolder mx-auto p-5 m-2">
           Tax Calculator
         </h3>
       </div>
@@ -235,7 +235,7 @@
       
         <article class="row justify-content-center p-3 m-2">
           <div
-            class="form-element col-md-4 d-flex align-items-center flex-column"
+            class="form-element col-3 d-flex align-items-center flex-column"
           >
             <label class="form-label"
               >Finacial Year<span class="required-asterisk">*</span>
@@ -255,7 +255,7 @@
             </div>
           </div>
           <div
-            class="form-element col-md-4 d-flex align-items-center flex-column"
+            class="form-element col-3 d-flex align-items-center flex-column"
           >
             <label class="form-label"
               >Age Group<span class="required-asterisk">*</span>
@@ -276,7 +276,7 @@
             </div>
           </div>
           <div
-            class="form-element col-md-4 d-flex align-items-center flex-column"
+            class="form-element col-3 d-flex align-items-center flex-column"
           >
             <label class="form-label"
               >Category<span class="required-asterisk">*</span>
@@ -305,7 +305,7 @@
             id="old_regime"
             value="Old Regime"
           />
-          <label class="btn btn-outline-secondary col-md-3 m-2 form-check-label" for="old_regime"
+          <label class="btn btn-outline-warning text-dark col-3 m-2 form-check-label" for="old_regime"
             >Old Regime</label
           >
           <input
@@ -316,7 +316,7 @@
             id="new_regime"
             value="New Regime"
           />
-          <label class="btn btn-outline-primary col-md-3 m-2 form-check-label" for="new_regime"
+          <label class="btn btn-outline-primary col-3 m-2 form-check-label" for="new_regime"
             >New Regime</label
           >
           <div class="invalid-feedback text-center">Please select a regime</div>
@@ -324,7 +324,7 @@
         <!-- rowssssssssssssssssssssssssssssssss -->
         <article class="row register-form justify-content-center">
           <!-- column -->
-          <section class="col-md-4 d-flex align-items-center flex-column">
+          <section class="col-4 d-flex align-items-center flex-column ">
             <div class="form-element">
               <label class="form-label"
                 >Income<span class="required-asterisk">*</span>
@@ -434,7 +434,7 @@
             </div>
           </section>
           <!-- column -->
-          <section class="col-md-4 d-flex align-items-center flex-column">
+          <section class="col-4 d-flex align-items-center flex-column ">
             <div class="form-element">
               <label class="form-label"
                 >Other Income
@@ -537,7 +537,7 @@
             </div>
           </section>
           <!-- column -->
-          <section class="col-md-4 d-flex align-items-center flex-column">
+          <section class="col-4 d-flex align-items-center flex-column ">
             <div class="form-element">
               <label class="form-label"
                 >Total Tax
@@ -643,13 +643,13 @@
         </article>
         <article class="main-btn row justify-content-center">
           <input
-            class="btnRegister col-md-2 p-2 m-3 btn btn-primary"
+            class="btnRegister col-2 p-2 m-3 btn btn-primary"
             type="submit"
             value="Save"
           />
           <input
             onclick=""
-            class="btnRegister col-md-2 p-2 m-3 btn btn-outline-secondary"
+            class="btnRegister col-2 p-2 m-3 btn btn-outline-secondary"
             type="reset"
             value="Cancel"
           />
@@ -661,25 +661,25 @@
     <!--tax savings guide start-->
     <section class="row d-flex">
       <div class="d-flex" id="class2">
-        <h3 class="text-dark mx-auto p-5 m-2">
+        <h3 class="text-dark fw-bolder mx-auto p-5 m-2">
           Tax Savings Guide
         </h3>
       </div>
       {% for items in guide %}
-      <article class="col-md-4">
+      <article class="col-md-4 col-sm-6">
         <div
           class="card mb-3 shadow border border-2 DDE6ED"
           style="max-width: 540px"
         >
           <div class="row g-0">
-            <div class="col-md-4 p-2">
+            <div class="col-4 col-sm-6 p-2">
               <img
                 src="{{ items.photo.url }}"
                 class="img-fluid rounded"
                 alt="los"
               />
             </div>
-            <div class="col-md-8">
+            <div class="col-8">
               <div class="card-body mb-2">
                 <h5 class="card-title font-weight-bold">
                   {{items.card_title}}
@@ -688,7 +688,7 @@
                 <!-- Button trigger modal -->
                 <button
                   type="button"
-                  class="btn btn-outline-dark"
+                  class="btn btn-outline-dark col-sm-12 col-xs-6"
                   data-toggle="modal"
                   data-target="#exampleModalCenter"
                 >
@@ -760,7 +760,7 @@
     <!-- tax slab rates start -->
     <section class="table-responsive" id="class3">
       <div class="d-flex">
-        <h2 class="text-dark mx-auto p-5 m-2">Tax Slab Rates</h2>
+        <h2 class="text-dark fw-bolder mx-auto p-5 m-2">Tax Slab Rates</h2>
       </div>
       <table class="table table-hover table-bordered border border-2 shadow bg-light">
         <caption>
@@ -948,7 +948,7 @@
         <lord-icon
             src="https://cdn.lordicon.com/xsdtfyne.json"
             trigger="hover"
-            colors="primary:#121331"
+            colors="primary:#000"
             state="hover-1"
             style="width:30px;height:30px">
         </lord-icon></a>
