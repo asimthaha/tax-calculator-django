@@ -19,10 +19,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin_tools_stats/', include('admin_tools_stats.urls')),
+    path('admin_tools/', include('admin_tools.urls')),
     path('', include('taxes.urls')),
 ]
 

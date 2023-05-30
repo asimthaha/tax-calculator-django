@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <section
+        class="bg-light border border-1 border-success rounded my-5 d-flex row"
+      >
+        <div class="d-flex">
+          <h3 class="mx-auto text-dark fw-bolder p-5 m-2">ANALYTICS</h3>
+        </div>
+        <article class="col-md-6 my-5">
+          <!-- first chart -->
+          <div class="col">
+            <canvas id="firstchart"></canvas>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const one = document.getElementById('firstchart');
+
+            new Chart(one, {
+              type: 'line',
+              data: {
+                labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+                datasets: [{
+                  label: ["Income"],
+                  data: [{% for records in saved_records %} '{{records.salary_income}}', {% endfor %}],
+                  borderWidth: 3
+                },{
+                  label: ["Income"],
+                  data: [{% for records in saved_records %} '{{records.other_income}}', {% endfor %}],
+                  borderWidth: 3
+                }]
+              },
+              options: {
+                animations: {
+                  tension: {
+                    duration: 1000,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                  }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Income Chart'
+                    }
+                }
+              }
+            });
+          </script>
+        </article>
+        <article class="col-md-6 my-5">
+          <!-- second chart -->
+          <div class="col">
+            <canvas id="secondchart"></canvas>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const two = document.getElementById('secondchart');
+
+            new Chart(two, {
+              type: 'bar',
+              data: {
+                labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+                datasets: [{
+                  label: ["Total Tax"],
+                  data: [{% for records in saved_records %} '{{records.total_tax}}', {% endfor %}],
+                  borderWidth: 1
+                },{
+                  label: ["taxable income"],
+                  data: [{% for records in saved_records %} '{{records.tax_on_taxable_income}}', {% endfor %}],
+                  borderWidth: 3
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tax Chart'
+                    }
+                }
+              },
+            });
+          </script>
+        </article>
+        <article class="col-md-6 my-5">
+          <!-- third chart -->
+          <div class="col">
+            <canvas id="thirdchart"></canvas>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const three = document.getElementById('thirdchart');
+
+            new Chart(three, {
+              type: 'radar',
+              data: {
+                labels: [{% for records in saved_records %} '{{records.age_group}}', {% endfor %}],
+                datasets: [{
+                  label: 'Standard Deduction',
+                  data: [{% for records in saved_records %} '{{records.standard_deduction}}', {% endfor %}],
+                  fill: true,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  pointBackgroundColor: 'rgb(255, 99, 132)',
+                  pointBorderColor: '#fff',
+                  pointHoverBackgroundColor: '#fff',
+                  pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                  label: 'Tax_on_taxable_income',
+                  data: [{% for records in saved_records %} '{{records.tax_on_taxable_income}}', {% endfor %}],
+                  fill: true,
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgb(54, 162, 235)',
+                  pointBackgroundColor: 'rgb(54, 162, 235)',
+                  pointBorderColor: '#fff',
+                  pointHoverBackgroundColor: '#fff',
+                  pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: false
+                  }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Taxable Income Chart'
+                    }
+                }
+              }
+            });
+          </script>
+        </article>
+        <article class="col-md-6 my-5">
+          <!-- fourth chart -->
+          <div class="col">
+            <canvas id="fourthchart"></canvas>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const four = document.getElementById('fourthchart');
+
+            new Chart(four, {
+              type: 'doughnut',
+              data: {
+                labels: [{% for records in saved_records %} '{{records.category_emp_or_pen}}', {% endfor %}],
+                datasets: [{
+                  label: ["Total Tax"],
+                  data: [{% for records in saved_records %} '{{records.home_loan}}', {% endfor %}],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Category Chart'
+                    }
+                }
+              }
+            });
+          </script>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,9 +1,7 @@
 from django.contrib import admin
 from admincharts.admin import AdminChartMixin
 from .models import *
-from django.db.models import Count
-from django.core.serializers.json import DjangoJSONEncoder
-import json
+
 
 
 # Register your models here.
@@ -40,19 +38,8 @@ class CarouselImagesAdmin(admin.ModelAdmin):
 class UserDetailsAdmin(admin.ModelAdmin):
     list_display = ("name", "email")
     list_filter = ("zipcode", "name")
-
-    def changelist_view(self, request, extra_context=None):
-        chart_data = (
-            UserDetails.objects.annotate(x=Count("user_id"))
-            .values("name")
-            .annotate(y=Count("name"))
-            .order_by("name")
-        )
-        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
-        print("Json %s" % as_json)
-        extra_context = extra_context or {"chart_data": as_json}
-
-        return super().changelist_view(request, extra_context=extra_context)
+    search_fields = ("name", "email")
+    
 
 
 @admin.register(UserFeedback)
