@@ -1,4 +1,5 @@
 <html>
+  {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -13,8 +14,34 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'taxes/css/main.css' %}" />
   </head>
   <body>
+    <header>
+      <nav class="navbar-expand-sm" style="background-color: #27374d">
+        <div class="container">
+          <!-- Brand -->
+          <article class="row">
+            <a class="navbar-brand d-flex align-items-center" href="/admin">
+              <section>
+                <video width="150" height="150" autoplay muted>
+                  <source
+                    src="{% static 'taxes/videos/tax_logo.mp4' %}"
+                    type="video/mp4"
+                  />
+                </video>
+              </section>
+              <section class="col mx-auto pl-5">
+                <div>
+                  <span class="text-warning h2">TAX</span
+                  ><span class="text-light h2">CALC</span>
+                </div>
+              </section>
+            </a>
+          </article>
+        </div>
+      </nav>
+    </header>
     <main class="container">
       <section
         class="bg-light border border-1 border-success rounded my-5 d-flex row"
@@ -36,14 +63,14 @@
             new Chart(one, {
               type: 'line',
               data: {
-                labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+                labels: [{% for records in analytics %} '{{records.financial_year}}', {% endfor %}],
                 datasets: [{
                   label: ["Income"],
-                  data: [{% for records in saved_records %} '{{records.salary_income}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.salary_income}}', {% endfor %}],
                   borderWidth: 3
                 },{
                   label: ["Income"],
-                  data: [{% for records in saved_records %} '{{records.other_income}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.other_income}}', {% endfor %}],
                   borderWidth: 3
                 }]
               },
@@ -86,14 +113,14 @@
             new Chart(two, {
               type: 'bar',
               data: {
-                labels: [{% for records in saved_records %} '{{records.financial_year}}', {% endfor %}],
+                labels: [{% for records in analytics %} '{{records.financial_year}}', {% endfor %}],
                 datasets: [{
                   label: ["Total Tax"],
-                  data: [{% for records in saved_records %} '{{records.total_tax}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.total_tax}}', {% endfor %}],
                   borderWidth: 1
                 },{
                   label: ["taxable income"],
-                  data: [{% for records in saved_records %} '{{records.tax_on_taxable_income}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.tax_on_taxable_income}}', {% endfor %}],
                   borderWidth: 3
                 }]
               },
@@ -127,10 +154,10 @@
             new Chart(three, {
               type: 'radar',
               data: {
-                labels: [{% for records in saved_records %} '{{records.age_group}}', {% endfor %}],
+                labels: [{% for records in analytics %} '{{records.age_group}}', {% endfor %}],
                 datasets: [{
                   label: 'Standard Deduction',
-                  data: [{% for records in saved_records %} '{{records.standard_deduction}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.standard_deduction}}', {% endfor %}],
                   fill: true,
                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
                   borderColor: 'rgb(255, 99, 132)',
@@ -140,7 +167,7 @@
                   pointHoverBorderColor: 'rgb(255, 99, 132)'
                 }, {
                   label: 'Tax_on_taxable_income',
-                  data: [{% for records in saved_records %} '{{records.tax_on_taxable_income}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.tax_on_taxable_income}}', {% endfor %}],
                   fill: true,
                   backgroundColor: 'rgba(54, 162, 235, 0.2)',
                   borderColor: 'rgb(54, 162, 235)',
@@ -180,10 +207,10 @@
             new Chart(four, {
               type: 'doughnut',
               data: {
-                labels: [{% for records in saved_records %} '{{records.category_emp_or_pen}}', {% endfor %}],
+                labels: [{% for records in analytics %} '{{records.category_emp_or_pen}}', {% endfor %}],
                 datasets: [{
                   label: ["Total Tax"],
-                  data: [{% for records in saved_records %} '{{records.home_loan}}', {% endfor %}],
+                  data: [{% for records in analytics %} '{{records.home_loan}}', {% endfor %}],
                   borderWidth: 1
                 }]
               },

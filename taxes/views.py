@@ -148,7 +148,7 @@ class DeleteRecordsView(View):
 
 class AnalyticsView(View):
     def get(self,request):
-        saved_records = TaxDetails.objects.all()
+        analytics = TaxDetails.objects.all()
         user_count = UserDetails.objects.all()
-        context = {"saved_records": saved_records,"user_count": user_count }
+        context = {"analytics": analytics,"user_count": user_count }
         return render(request, "admin/analytics.html", context)

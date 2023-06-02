@@ -98,7 +98,6 @@ class UserFeedback(models.Model):
     def __str__(self):
         return self.description
 
-
 class CarouselImages(models.Model):
     photo = models.ImageField(upload_to="photo", blank=True, null=True)
     description = models.CharField(max_length=300)

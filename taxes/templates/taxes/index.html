@@ -63,8 +63,8 @@
           </a>
         </article>
         <!-- Navbar links -->
-        <article>
-          <nav id="navbar" class="navbar col-sm-12 col-xs-12">
+        <article class="row">
+          <nav id="navbar" class="navbar col-12">
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto nav-pills">
               <li class="nav-item dropdown">
@@ -110,7 +110,7 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'taxes:feedback' %}">Feedback<i class="mx-2 text-warning bi bi-chat-left-text-fill"></i></a>
+                    <a class="dropdown-item" href="{% url 'taxes:feedback' %}">Feedback</a>
                   </li>
                   <li>
                     <a
@@ -123,7 +123,7 @@
               </ul>
             </div>
               </li>
-              <li">
+              <!-- <li">
                 <a
                   role="button"
                   data-bs-toggle="modal"
@@ -142,7 +142,6 @@
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger"
                   >
                     <span class="visually-hidden">unread messages</span>
-                    <!--								{{noti_count}}-->
                   </span>
                 </a>
 
@@ -202,7 +201,7 @@
                     </div>
                   </div>
                 </div>
-              </li>
+              </li> -->
             </ul>
           </div>
         </nav>
@@ -342,7 +341,6 @@
                   oninput="taxCalculate()"
                   placeholder="Income from salary *"
                   id="income"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please provide income.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -386,7 +384,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="Enter GPF PPF LIC etc *"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please add valid postitve number.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -406,7 +403,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please provide income.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -426,7 +422,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please give income.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -450,7 +445,6 @@
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="Your other income "
                   oninput="taxCalculate()"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please provide a postive income.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -472,7 +466,6 @@
                   onkeypress="return allowOnlyNumbers(event)"
                   tabindex="5"
                   placeholder="P tax if any *"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please provide a postitve number.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -490,10 +483,11 @@
                   oninput="taxCalculate()"
                   class="form-control"
                   min="1"
+                  max="50000"
+                  maxlength="5"
                   onkeypress="return allowOnlyNumbers(event)"
                   tabindex="8"
                   placeholder="max NPS 50,000 *"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please add a postitve nps.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -513,7 +507,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
               </div>
             </div>
@@ -531,7 +524,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
               </div>
             </div>
@@ -553,7 +545,6 @@
                   onkeypress="return allowOnlyNumbers(event)"
                   tabindex="3"
                   placeholder="Your total tax *"
-                  value="0"
                 />
                 <div class="invalid-feedback"></div>
                 <div class="valid-feedback">Looks good!</div>
@@ -574,7 +565,6 @@
                   tabindex="6"
                   oninput="taxCalculate()"
                   placeholder="u/s 10 (13A) of ITR *"
-                  value="0"
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 />
                 <div class="invalid-feedback">Please give a postitve hra.</div>
@@ -597,7 +587,6 @@
                   oninput="taxCalculate()"
                   placeholder="Interest on Home Loan *"
                   oninput="console.log(TaxCalculate())"
-                  value="0"
                 />
                 <div class="invalid-feedback">Please.</div>
                 <div class="valid-feedback">Looks good!</div>
@@ -617,7 +606,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
               </div>
             </div>
@@ -635,7 +623,6 @@
                   min="1"
                   onkeypress="return allowOnlyNumbers(event)"
                   placeholder="0"
-                  value="0"
                 />
               </div>
             </div>
@@ -933,8 +920,8 @@
         </div>
       </div>
     </div>
-    <div class="copyright border pt-2">
-      <div class="container">
+    <div class="copyright pt-2">
+      <div class="">
         <div class="row justify-content-md-center">
           <p>© 2023 Tax Calc Software Pvt. Ltd.</p>
         </div>
@@ -989,8 +976,20 @@
 ></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $('#my_form').submit(function(){
-    $("#my_form :disabled").removeAttr('disabled');
+  $('#my_form').submit(function() {
+  $("#my_form :disabled").removeAttr('disabled');
+
+  // Get all of the input fields in the form
+  var inputs = $("#my_form input");
+
+  // Loop through each input field
+  for (var i = 0; i < inputs.length; i++) {
+    // If the input field is empty
+    if (inputs[i].value == "") {
+      // Set the value of the input field to 0
+      inputs[i].value = 0;
+    }
+  }
 });
 </script>
 <script>
